@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using WIM14.Commands.Contracts;
 
 namespace WIM14.Commands.Abstracts
 {
-    class Command
+    class Command : ICommand
     {
     }
 }
