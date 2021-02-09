@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace WIM14.Models.Contracts
+namespace WIM14.Models.Enums
 {
-    public interface ITeam
+    public enum BugStatus
     {
+        Active,
+        Fixed
     }
 }

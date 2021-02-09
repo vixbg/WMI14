@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace WIM14.Models.Contracts
+namespace WIM14.Core.Contracts
 {
-    public interface ITeam
+    interface IHistoryEntry
     {
+
     }
 }

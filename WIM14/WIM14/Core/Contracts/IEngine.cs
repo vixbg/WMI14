@@ -6,5 +6,6 @@ namespace WIM14.Core.Contracts
 {
     interface IEngine
     {
+        void Run();
     }
 }
