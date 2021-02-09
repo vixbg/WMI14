@@ -4,7 +4,7 @@ using System.Text;
 
 namespace WIM14.Core.Contracts
 {
-    interface IHistoryEntry
+    public interface IHistoryEntry
     {
 
     }

@@ -6,7 +6,7 @@ using WIM14.Models.Enums;
 
 namespace WIM14.Core.Contracts
 {
-    interface IFactory
+    public interface IFactory
     {
         IBoard CreateBoard(string name, IList<IWorkItems> workItems, IList<HistoryEntry> history);
         IMember CreateMember(string name, IList<IWorkItems> workItems, IList<HistoryEntry> history, ITeam team);

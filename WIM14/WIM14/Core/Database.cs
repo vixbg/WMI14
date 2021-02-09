@@ -4,17 +4,40 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
+using WIM14.Core.Contracts;
 using WIM14.Models;
+using WIM14.Models.Contracts;
 
 namespace WIM14.Core
 {
-    class Database
+    class Database : IDatabase
     {
-        public static List<Team> Teams { get; set; }
-        public static List<Member> Members { get; set; }
+        private static IDatabase instance = null;
+        public static IDatabase Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new Database();
+                }
+
+                return instance;
+            }
+        }
+
+        private readonly List<IMember> members = new List<IMember>();
+        public IList<IMember> Members => this.members;
+
+        private readonly List<ITeam> teams = new List<ITeam>();
+        public IList<ITeam> Teams => this.teams;
+
+        private readonly List<IWorkItems> workItems = new List<IWorkItems>();
+        public IList<IWorkItems> WorkItems => this.workItems;
 
         // Add team, edit team, remove team
 
+        /*
         public Member CreateMember(string name, Team team) // Move to Factory 
         {
             if (Database.Members.Any(m => m.Name == name))
@@ -29,7 +52,9 @@ namespace WIM14.Core
                 Team = team
             };
         }
-
+        */
+        //JSON 
+        /*
         public void Save()
         {
             var database = JsonSerializer.Serialize(Teams, new JsonSerializerOptions()
@@ -49,5 +74,6 @@ namespace WIM14.Core
             var database = File.ReadAllText("database.json");
             Teams = JsonSerializer.Deserialize<List<Team>>(database);
         }
+        */
     }
 }

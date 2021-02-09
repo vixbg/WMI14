@@ -4,7 +4,7 @@ using System.Text;
 
 namespace WIM14.Core.Contracts
 {
-    interface IEngine
+    public interface IEngine
     {
         void Run();
     }

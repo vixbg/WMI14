@@ -5,7 +5,7 @@ using WIM14.Commands.Contracts;
 
 namespace WIM14.Core.Contracts
 {
-    interface ICommandManager
+    public interface ICommandManager
     {
         ICommand ParseCommand(string commandLine);
     }

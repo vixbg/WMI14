@@ -5,7 +5,7 @@ using WIM14.Core.Contracts;
 
 namespace WIM14.Core
 {
-    class HistoryEntry : IHistoryEntry
+    public class HistoryEntry : IHistoryEntry
     {
     }
 }

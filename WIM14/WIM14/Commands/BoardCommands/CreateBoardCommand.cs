@@ -5,7 +5,12 @@ using WIM14.Commands.Abstracts;
 
 namespace WIM14.Commands
 {
-    class CreateBoardCommand : Command
+    public class CreateBoardCommand : Command
     {
+
+        public CreateBoardCommand(List<string> commandParameters) : base(commandParameters)
+        {
+            
+        }
     }
 }

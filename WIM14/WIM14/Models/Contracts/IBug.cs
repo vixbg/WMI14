@@ -4,7 +4,7 @@ using System.Text;
 
 namespace WIM14.Models.Contracts
 {
-    interface IBug
+    public interface IBug
     {
     }
 }

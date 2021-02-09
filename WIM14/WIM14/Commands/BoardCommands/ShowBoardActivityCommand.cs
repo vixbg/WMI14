@@ -7,5 +7,8 @@ namespace WIM14.Commands
 {
     class ShowBoardActivityCommand : Command
     {
+        public ShowBoardActivityCommand(IList<string> commandParameters) : base(commandParameters)
+        {
+        }
     }
 }
