@@ -7,5 +7,13 @@ namespace WIM14.Commands
 {
     class ChangeStoryStatusCommand : Command
     {
+        public ChangeStoryStatusCommand(IList<string> commandParameters) : base(commandParameters)
+        {
+        }
+        public override string Execute()
+        {
+            //ToDo
+            throw new NotImplementedException();
+        }
     }
 }

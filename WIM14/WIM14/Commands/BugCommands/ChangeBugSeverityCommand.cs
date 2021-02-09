@@ -7,5 +7,13 @@ namespace WIM14.Commands
 {
     class ChangeBugSeverityCommand : Command
     {
+        public ChangeBugSeverityCommand(IList<string> commandParameters) : base(commandParameters)
+        {
+        }
+        public override string Execute()
+        {
+            //ToDo
+            throw new NotImplementedException();
+        }
     }
 }

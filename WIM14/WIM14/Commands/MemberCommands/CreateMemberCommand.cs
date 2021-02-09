@@ -7,5 +7,13 @@ namespace WIM14.Commands
 {
     class CreateMemberCommand : Command
     {
+        public CreateMemberCommand(IList<string> commandParameters) : base(commandParameters)
+        {
+        }
+        public override string Execute()
+        {
+            //ToDo
+            throw new NotImplementedException();
+        }
     }
 }

@@ -7,5 +7,13 @@ namespace WIM14.Commands
 {
     class ShowAllMembersCommand : Command
     {
+        public ShowAllMembersCommand(IList<string> commandParameters) : base(commandParameters)
+        {
+        }
+        public override string Execute()
+        {
+            //ToDo
+            throw new NotImplementedException();
+        }
     }
 }
