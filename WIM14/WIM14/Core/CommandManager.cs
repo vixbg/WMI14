@@ -54,9 +54,7 @@ namespace WIM14.Core
                 "assignworkitem" => new AssignWorkItemCommand(commandParameters),
                 "listworkitems" => new ListWorkItemsCommand(commandParameters),
                 "unassignworkitem" => new UnassignWorkItemCommand(commandParameters),
-
-
-
+                //default
                 _ => throw new InvalidOperationException("Command does not exist!")
             };
 
