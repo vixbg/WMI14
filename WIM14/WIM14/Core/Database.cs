@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Text.Json;
+﻿using System.Collections.Generic;
 using WIM14.Core.Contracts;
-using WIM14.Models;
 using WIM14.Models.Contracts;
 
 namespace WIM14.Core
@@ -32,8 +26,8 @@ namespace WIM14.Core
         private readonly List<ITeam> teams = new List<ITeam>();
         public IList<ITeam> Teams => this.teams;
 
-        private readonly List<IWorkItems> workItems = new List<IWorkItems>();
-        public IList<IWorkItems> WorkItems => this.workItems;
+        private readonly List<IWorkItem> workItems = new List<IWorkItem>();
+        public IList<IWorkItem> WorkItems => this.workItems;
 
         // Add team, edit team, remove team
 
