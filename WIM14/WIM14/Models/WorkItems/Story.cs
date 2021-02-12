@@ -7,7 +7,7 @@ using Type = WIM14.Models.Enums.Type;
 
 namespace WIM14.Models.WorkItems
 {
-    class Story : Abstracts.WorkItems<StoryStatus>, IStory, IType
+    class Story : Abstracts.WorkItem<StoryStatus>, IStory, IType
     {
         private Type type = Type.Story;
 

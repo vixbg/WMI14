@@ -3,18 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using WIM14.Core;
+using WIM14.Core.Contracts;
 using WIM14.Models.Contracts;
 
 namespace WIM14.Models.Abstracts
 {
-    class WorkItems<T> : IWorkItem, IWorkItemStatus<T> where T : Enum 
+    class WorkItem<T> : IWorkItem, IWorkItemStatus<T> where T : Enum 
     {
         private readonly int id;
-        private List<IComment> comments;
-        private List<HistoryEntry> history;
         private string title;
         private string description;
-        private T status;
         private const int MinDescLength = 10;
         private const int MaxDescLength = 500;
         private const int MinTitleLength = 10;
@@ -23,30 +21,23 @@ namespace WIM14.Models.Abstracts
         private const string DescType = "Description";
 
 
-        public WorkItems(string title, string description)
+        public WorkItem(string title, string description)
         {
             this.id = Database.Instance.WorkItems.Max(m => m.Id) + 1;
-            this.history = new List<HistoryEntry>();
-            this.comments = new List<IComment>();
+            this.History = new List<IHistoryEntry>();
+            this.Comments = new List<IComment>();
             this.title = title;
             this.description = description;
+            //TODO: Add history entry
             
         }
 
         public int Id => id;
         
 
-        public List<IComment> Comments //TODO: Implement Comments
-        {
-            get => comments;
-            set => comments = value;
-        }
+        public List<IComment> Comments { get; set; }
 
-        public List<HistoryEntry> History
-        {
-            get => history;
-            set => history = value;
-        }
+        public List<IHistoryEntry> History { get; set; }
 
         public string Title
         {
@@ -60,11 +51,7 @@ namespace WIM14.Models.Abstracts
             set => description = EnsureValidString(value, MinDescLength, MaxDescLength, DescType);
         }
 
-        public T Status
-        {
-            get => status;
-            protected set => status = value;
-        }
+        public T Status { get; protected set; }
 
         public virtual string EnsureValidString(string value, int min, int max, string type)
         {

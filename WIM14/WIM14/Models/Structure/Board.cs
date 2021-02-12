@@ -8,7 +8,7 @@ namespace WIM14.Models
 {
     public class Board : IBoard
     {
-        private readonly List<IWorkItems> workItems = new List<IWorkItems>(); // mislq, che trqbva da e ot WorkItems, a ne IWorkItems
+        private readonly List<IWorkItem> workItems = new List<IWorkItem>(); // mislq, che trqbva da e ot WorkItem, a ne IWorkItems
         private readonly List<HistoryEntry> activityHistory = new List<HistoryEntry>();
         private string name;
         public Board(string newName)

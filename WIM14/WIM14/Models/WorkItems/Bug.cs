@@ -7,7 +7,7 @@ using Type = WIM14.Models.Enums.Type;
 
 namespace WIM14.Models.WorkItems
 {
-    class Bug : Abstracts.WorkItems<BugStatus>, IBug, IType
+    class Bug : Abstracts.WorkItem<BugStatus>, IBug, IType
     {
         private readonly Type type = Type.Bug;
 
@@ -19,9 +19,9 @@ namespace WIM14.Models.WorkItems
             this.Severity = severity;
             this.Assignee = assignee;
             this.Status = BugStatus.Active;
+            //TODO: Add history entry.
             
         }
-
 
         public Type Type => type;
 
@@ -45,7 +45,7 @@ namespace WIM14.Models.WorkItems
             sb.AppendLine($"Description: {Description}");
             sb.AppendLine($"Assignee: {Assignee}");
             sb.AppendLine($"Steps to Reproduce: {StepsToReproduce}");
-            sb.AppendLine($"Comments: {Comments}"); //How to Print? Foreach!
+            sb.AppendLine($"Comments: {Comments}"); //How to Print? Foreach! Or use Method.
 
             return sb.ToString().Trim();
         }

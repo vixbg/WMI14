@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using WIM14.Core;
+using WIM14.Core.Contracts;
 
 namespace WIM14.Models.Contracts
 {
@@ -13,7 +14,7 @@ namespace WIM14.Models.Contracts
     {
         public int Id { get; }
         public List<IComment> Comments { get; set; }
-        public List<HistoryEntry> History { get; set; }
+        public List<IHistoryEntry> History { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
     }

@@ -7,7 +7,7 @@ using Type = WIM14.Models.Enums.Type;
 
 namespace WIM14.Models.WorkItems
 {
-    class Feedback : Abstracts.WorkItems<FeedbackStatus>, IFeedback, IType
+    class Feedback : Abstracts.WorkItem<FeedbackStatus>, IFeedback, IType
     {
         private Type type = Type.Feedback;
         private int raiting;
