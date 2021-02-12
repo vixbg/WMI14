@@ -9,6 +9,6 @@ namespace WIM14.Core.Contracts
     {
         IList<IMember> Members { get; }
         IList<ITeam> Teams { get; }
-        IList<IWorkItems> WorkItems { get; }
+        IList<IWorkItem> WorkItems { get; }
     }
 }

@@ -4,7 +4,7 @@ namespace WIM14.Models.Contracts
 {
     public interface IType
     {
-        protected Type Type { get; }
+        public Type Type { get; }
 
 
     }
