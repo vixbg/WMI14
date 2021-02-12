@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using WIM14.Core;
+using WIM14.Core.Contracts;
 using WIM14.Models.Contracts;
 using Type = WIM14.Models.Enums.Type;
 
@@ -10,7 +11,7 @@ namespace WIM14.Models
 {
     public class Team : ITeam
     {
-        private readonly List<Member> members = new List<Member>();
+        private readonly List<Member> members = new List<Member>(); 
         private readonly List<Board> boards = new List<Board>();
         private string name;
 
@@ -32,13 +33,12 @@ namespace WIM14.Models
         public void AddPerson(Member newMember)
         {
             this.members.Add(newMember);
-            this.members.Last().AddHistoryEntry($"Member was added to team {this.Name}.");
-            //da dobavim v na member-a historyto, che e bil dobaven v edi koi si team?
+            this.members.Last().AddHistoryEntry($"Member was added to team {this.Name}."); //TODO gettype
         }
 
         public string ShowTeamActivity()
         {
-            List<HistoryEntry> teamActivity = new List<HistoryEntry>();
+            List<IHistoryEntry> teamActivity = new List<IHistoryEntry>();
 
             foreach (var member in this.members)
             {
@@ -50,9 +50,9 @@ namespace WIM14.Models
                 return $"There is no team activity to show.";
             }
 
-            List<HistoryEntry> sortedList = teamActivity.OrderBy(historyEntry => historyEntry.Time).ToList();
+            List<IHistoryEntry> sortedList = teamActivity.OrderByDescending(historyEntry => historyEntry.Time).ToList();
 
-            return string.Join(Environment.NewLine, sortedList);            
+            return string.Join(Environment.NewLine, sortedList); //TODO: make it pretty
         }
 
         private void EnsureValidName(string value)
