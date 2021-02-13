@@ -10,7 +10,6 @@ namespace WIM14.Models.Abstracts
 {
     class WorkItem<T> : IWorkItem, IWorkItemStatus<T> where T : Enum 
     {
-        private readonly int id;
         private string title;
         private string description;
         private const int MinDescLength = 10;
@@ -23,7 +22,7 @@ namespace WIM14.Models.Abstracts
 
         public WorkItem(string title, string description)
         {
-            this.id = Database.Instance.WorkItems.Max(m => m.Id) + 1;
+            this.Id = Database.Instance.WorkItems.Max(m => m.Id) + 1;
             this.History = new List<IHistoryEntry>();
             this.Comments = new List<IComment>();
             this.title = title;
@@ -32,8 +31,8 @@ namespace WIM14.Models.Abstracts
             
         }
 
-        public int Id => id;
-        
+        public int Id { get; }
+
 
         public List<IComment> Comments { get; set; }
 
@@ -51,7 +50,7 @@ namespace WIM14.Models.Abstracts
             set => description = EnsureValidString(value, MinDescLength, MaxDescLength, DescType);
         }
 
-        public T Status { get; protected set; }
+        public T Status { get; set; }
 
         public virtual string EnsureValidString(string value, int min, int max, string type)
         {

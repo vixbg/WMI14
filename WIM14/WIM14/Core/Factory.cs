@@ -29,9 +29,9 @@ namespace WIM14.Core
             throw new NotImplementedException();
         }
 
-        public IBug CreateBug(string title, string description, List<string> stepsToReproduce, Priority priority, Severity severity, IMember assignee)
+        public IBug CreateBug(string title, string description, List<string> stepsToReproduce, Priority priority, Severity severity)
         {
-            return new Bug(title, description, stepsToReproduce, priority, severity, assignee);
+            return new Bug(title, description, stepsToReproduce, priority, severity);
             
         }
 

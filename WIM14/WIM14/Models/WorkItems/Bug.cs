@@ -12,12 +12,11 @@ namespace WIM14.Models.WorkItems
         private readonly Type type = Type.Bug;
 
 
-        public Bug(string title, string description, List<string> stepsToReproduce, Priority priority, Severity severity,IMember assignee) : base(title, description)
+        public Bug(string title, string description, List<string> stepsToReproduce, Priority priority, Severity severity) : base(title, description)
         {
             this.StepsToReproduce = stepsToReproduce;
             this.Priority = priority;
             this.Severity = severity;
-            this.Assignee = assignee;
             this.Status = BugStatus.Active;
             //TODO: Add history entry.
             

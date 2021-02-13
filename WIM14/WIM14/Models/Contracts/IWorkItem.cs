@@ -7,7 +7,7 @@ namespace WIM14.Models.Contracts
 {
     public interface IWorkItemStatus<T> where T : Enum
     {
-        public T Status { get; }
+        public T Status { get; set; }
     }
 
     public interface IWorkItem
