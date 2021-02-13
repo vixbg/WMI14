@@ -11,11 +11,10 @@ namespace WIM14.Models.WorkItems
     {
         private Type type = Type.Story;
 
-        public Story(string title, string description, Priority priority, Size size, IMember assignee) : base(title, description)
+        public Story(string title, string description, Priority priority, Size size) : base(title, description)
         {
             this.Priority = priority;
             this.Size = size;
-            this.Assignee = assignee;
             this.Status = StoryStatus.NotDone;
         }
 
@@ -38,7 +37,7 @@ namespace WIM14.Models.WorkItems
             sb.AppendLine($"Title: {Title}");
             sb.AppendLine($"Description: {Description}");
             sb.AppendLine($"Assignee: {Assignee}");
-            sb.AppendLine($"Comments: {Comments}"); //How to Print?
+            Comments.ForEach(c => sb.AppendLine($"Comments: {c}"));
 
             return sb.ToString().Trim();
         }

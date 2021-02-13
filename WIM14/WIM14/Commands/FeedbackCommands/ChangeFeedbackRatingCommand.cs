@@ -22,7 +22,7 @@ namespace WIM14.Commands
             try
             {
                 id = int.Parse(this.CommandParameters[0]);
-                feedback = (IFeedback)this.Database.WorkItems.First(b => b.Id == id);
+                feedback = (IFeedback)this.Database.WorkItems.First(f => f.Id == id);
                 newRating = int.Parse(this.CommandParameters[1]);
             }
             catch 
@@ -33,7 +33,12 @@ namespace WIM14.Commands
             previousRating = feedback.Rating;
             feedback.Rating = newRating;
 
-            return $"Rating changed on Feedback with ID{feedback.Id} from {previousRating}stars to {feedback.Rating}stars"; 
+            return feedback.Rating == 1 
+                ? $"Rating changed on Feedback with ID{feedback.Id} from {previousRating}stars to {feedback.Rating}star." 
+                : previousRating == 1 
+                    ? $"Rating changed on Feedback with ID{feedback.Id} from {previousRating}star to {feedback.Rating}stars" 
+                    : $"Rating changed on Feedback with ID{feedback.Id} from {previousRating}stars to {feedback.Rating}stars"; 
+
             //TODO:Fix plural star/stars
         }
     }

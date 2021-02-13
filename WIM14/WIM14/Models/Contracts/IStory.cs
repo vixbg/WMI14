@@ -7,8 +7,8 @@ namespace WIM14.Models.Contracts
 {
     public interface IStory : IWorkItem, IWorkItemStatus<StoryStatus>
     {
-        Priority Priority { get; }
-        Size Size{ get; }
+        Priority Priority { get; set; }
+        Size Size { get; set; }
         IMember Assignee { get; }
     }
 }

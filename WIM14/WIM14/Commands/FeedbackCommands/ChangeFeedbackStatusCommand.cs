@@ -23,7 +23,7 @@ namespace WIM14.Commands
             {
                 //TODO: Validations
                 id = int.Parse(this.CommandParameters[0]);
-                feedback = (IFeedback)this.Database.WorkItems.First(b => b.Id == id);
+                feedback = (IFeedback)this.Database.WorkItems.First(f => f.Id == id);
                 newStatus = Enum.Parse<FeedbackStatus>(this.CommandParameters[1]);
             }
             catch

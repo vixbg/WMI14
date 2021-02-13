@@ -45,9 +45,9 @@ namespace WIM14.Core
             throw new NotImplementedException();
         }
 
-        public IStory CreateStory(string title, string description, Priority priority, Size size, IMember assignee)
+        public IStory CreateStory(string title, string description, Priority priority, Size size)
         {
-            return new Story(title, description, priority, size, assignee);
+            return new Story(title, description, priority, size);
         }
 
         public ITeam CreateTeam(string name, IList<IMember> members, IList<IBoard> boards)

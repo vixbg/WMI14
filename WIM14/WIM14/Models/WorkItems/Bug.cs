@@ -43,8 +43,9 @@ namespace WIM14.Models.WorkItems
             sb.AppendLine($"Title: {Title}");
             sb.AppendLine($"Description: {Description}");
             sb.AppendLine($"Assignee: {Assignee}");
-            sb.AppendLine($"Steps to Reproduce: {StepsToReproduce}");
-            sb.AppendLine($"Comments: {Comments}"); //How to Print? Foreach! Or use Method.
+            sb.AppendLine($"Steps to Reproduce:");
+            StepsToReproduce.ForEach(s => sb.AppendLine($"|{s}|"));
+            Comments.ForEach(c => sb.AppendLine($"Comments: {c}"));
 
             return sb.ToString().Trim();
         }

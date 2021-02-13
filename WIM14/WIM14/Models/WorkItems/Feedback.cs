@@ -43,15 +43,8 @@ namespace WIM14.Models.WorkItems
             sb.AppendLine($"ID: {Id}");
             sb.AppendLine($"Title: {Title}");
             sb.AppendLine($"Description: {Description}");
-            if (this.rating == 1)
-            {
-                sb.AppendLine($"Rating: {Rating} star.");
-            }
-            else
-            {
-                sb.AppendLine($"Rating: {Rating} stars.");
-            }
-            sb.AppendLine($"Comments: {Comments}"); //How to Print?
+            sb.AppendLine(this.rating == 1 ? $"Rating: {Rating} star." : $"Rating: {Rating} stars.");
+            Comments.ForEach(c => sb.AppendLine($"Comments: {c}"));
 
             return sb.ToString().Trim();
         }

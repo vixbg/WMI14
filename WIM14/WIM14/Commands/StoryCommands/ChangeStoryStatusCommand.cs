@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using WIM14.Commands.Abstracts;
+using WIM14.Models.Contracts;
+using WIM14.Models.Enums;
 
 namespace WIM14.Commands
 {
@@ -12,8 +15,25 @@ namespace WIM14.Commands
         }
         public override string Execute()
         {
-            //ToDo
-            throw new NotImplementedException();
+            int id;
+            IStory story;
+            StoryStatus previouStatus;
+            StoryStatus newStatus;
+            try
+            {
+                //TODO: Validations
+                id = int.Parse(this.CommandParameters[0]);
+                story = (IStory)this.Database.WorkItems.First(s => s.Id == id);
+                newStatus = Enum.Parse<StoryStatus>(this.CommandParameters[1]);
+            }
+            catch
+            {
+                throw new ArgumentException("Failed to parse ChangeStoryStatus command parameters.");
+            }
+            previouStatus = story.Status;
+            story.Status = newStatus;
+
+            return $"Status changed on Story with ID{story.Id} from {previouStatus} to {story.Status}";
         }
     }
 }
