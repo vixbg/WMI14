@@ -7,6 +7,6 @@ namespace WIM14.Models.Contracts
 {
     public interface IFeedback : IWorkItem, IWorkItemStatus<FeedbackStatus>
     {
-        int Raiting { get; }
+        int Rating { get; set; }
     }
 }
