@@ -9,8 +9,9 @@ namespace WIM14.Models
 {
     public class Member : IMember
     {
-        //TODO: add workitem
-        //TODO: add person to team naprimer da imame string team i metod ChangeTeam v koito logvame v koi team e dobaven? kogato dobavim member v team, vikame changeteam 
+        //TODO: add workitem // molq??
+        private const int MAX_LENGTH = 15;
+        private const int MIN_LENGTH = 5;
         private readonly List<IWorkItem> workItems = new List<IWorkItem>(); 
         private readonly List<IHistoryEntry> activityHistory = new List<IHistoryEntry>();
 
@@ -18,15 +19,9 @@ namespace WIM14.Models
         {
             this.EnsureValidName(newName);
             this.Name = newName;
-            this.Type = Type.Member;
-            this.AddHistoryEntry($"{this.Type} with name {this.Name} was created.");
+            this.AddHistoryEntry($"{this.GetType().Name} with name {this.Name} was created.");
         }
         public string Name
-        {
-            get;
-        }
-
-        public Type Type
         {
             get;
         }
@@ -36,9 +31,30 @@ namespace WIM14.Models
             get => this.activityHistory;
         }
 
-        public string ShowInfo() //TODO: ToString
+        //tova neshto ne mi dava da go sloja v IMember?
+        public string AssignedTeam { get; private set; } = "";
+
+        public void AssignTeam(string teamName)
         {
-            return $"{this.Type} {this.Name} || Total work items: {this.workItems.Count} ";
+            if (this.AssignedTeam == "")
+            {
+                this.AssignedTeam = teamName;
+            }
+            else
+            {
+                throw new ArgumentException($"Member {this.Name} is already in another team.");
+            }
+        }
+        public override string ToString()
+        {
+            if(this.AssignedTeam == "")
+            {
+                return $"{this.GetType().Name} {this.Name} || Total work items: {this.workItems.Count} ";
+            }
+            else
+            {
+                return $"{this.GetType().Name} {this.Name} || Total work items: {this.workItems.Count} || Team {this.AssignedTeam}";
+            }
         }
         public string ShowActivityHistory()
         {
@@ -54,7 +70,7 @@ namespace WIM14.Models
             {
                 throw new ArgumentException("Please provide a non-empty name.");
             }
-            if (value.Length < 5 || value.Length > 15) //TODO: remove magic numbers
+            if (value.Length < MIN_LENGTH || value.Length > MAX_LENGTH) 
             {
                 throw new ArgumentException("Please provide a name with length between 5 and 15 characters.");
             }

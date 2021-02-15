@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using WIM14.Core.Contracts;
+using WIM14.Models;
 using WIM14.Models.Contracts;
 using WIM14.Models.Enums;
 using WIM14.Models.WorkItems;
@@ -24,9 +25,9 @@ namespace WIM14.Core
                 return instance;
             }
         }
-        public IBoard CreateBoard(string name, IList<IWorkItem> workItems, IList<HistoryEntry> history)
+        public IBoard CreateBoard(string name)
         {
-            throw new NotImplementedException();
+            return new Board(name);
         }
 
         public IBug CreateBug(string title, string description, List<string> stepsToReproduce, Priority priority, Severity severity)
@@ -40,9 +41,9 @@ namespace WIM14.Core
             return new Feedback(title, description, rating);
         }
 
-        public IMember CreateMember(string name, IList<IWorkItem> workItems, IList<HistoryEntry> history, ITeam team)
+        public IMember CreateMember(string name)
         {
-            throw new NotImplementedException();
+            return new Member(name);
         }
 
         public IStory CreateStory(string title, string description, Priority priority, Size size)
@@ -50,9 +51,9 @@ namespace WIM14.Core
             return new Story(title, description, priority, size);
         }
 
-        public ITeam CreateTeam(string name, IList<IMember> members, IList<IBoard> boards)
+        public ITeam CreateTeam(string name)
         {
-            throw new NotImplementedException();
+            return new Team(name);
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using WIM14.Commands.Abstracts;
 
 namespace WIM14.Commands
@@ -12,8 +11,9 @@ namespace WIM14.Commands
         }
         public override string Execute()
         {
-            //ToDo
-            throw new NotImplementedException();
+            return this.Database.Members.Count > 0
+                ? string.Join(Environment.NewLine, this.Database.Members).Trim()
+                : "There are no registered members.";
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 using WIM14.Commands.Abstracts;
 
 namespace WIM14.Commands
@@ -12,8 +12,9 @@ namespace WIM14.Commands
         }
         public override string Execute()
         {
-            //ToDo
-            throw new NotImplementedException();
+            var memberActivityist = this.Database.Members.Select(member => member.ShowActivityHistory());
+
+            return string.Join(Environment.NewLine, memberActivityist);
         }
     }
 }

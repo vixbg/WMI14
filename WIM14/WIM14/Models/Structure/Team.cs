@@ -33,7 +33,8 @@ namespace WIM14.Models
         public void AddPerson(Member newMember)
         {
             this.members.Add(newMember);
-            this.members.Last().AddHistoryEntry($"Member was added to team {this.Name}."); //TODO gettype
+            this.members.Last().AssignTeam(this.name);
+            this.members.Last().AddHistoryEntry($"Member was added to team {this.Name}."); 
         }
 
         public string ShowTeamActivity()

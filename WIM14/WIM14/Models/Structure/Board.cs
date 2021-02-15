@@ -10,14 +10,15 @@ namespace WIM14.Models
     public class Board : IBoard
     {
         //TODO add workitem
+        private const int MAX_LENGTH = 15;
+        private const int MIN_LENGTH = 5;
         private readonly List<IWorkItem> workItems = new List<IWorkItem>(); 
         private readonly List<IHistoryEntry> activityHistory = new List<IHistoryEntry>();
         private string name;
         public Board(string newName)
         {
             this.Name = newName;
-            this.Type = Type.Board;
-            this.AddHistoryEntry($"{this.Type} with name {this.Name} was created.");
+            this.AddHistoryEntry($"{this.GetType().Name} with name {this.Name} was created.");
         }
         public string Name 
         {
@@ -26,18 +27,13 @@ namespace WIM14.Models
             {
                 this.EnsureValidName(value);
                 this.name = value;
-                this.AddHistoryEntry($"{this.Type} name was changed to {value}.");
+                this.AddHistoryEntry($"{this.GetType().Name} name was changed to {value}.");
             }
         }
 
-        public Type Type 
+        public override string ToString()
         {
-            get;
-        }
-
-        public string ShowInfo() //TODO: ToString
-        {
-            return $"{this.Type} {this.Name} || Total work items: {this.workItems.Count} ";
+            return $"{this.GetType().Name} {this.Name} || Total work items: {this.workItems.Count} ";
         }
         public string ShowActivityHistory()
         {
@@ -53,7 +49,7 @@ namespace WIM14.Models
             {
                 throw new ArgumentException("Please provide a non-empty name.");
             }
-            if (value.Length < 5 || value.Length > 15) // TODO - remove magic numbers 
+            if (value.Length < MIN_LENGTH || value.Length > MAX_LENGTH) 
             {
                 throw new ArgumentException("Please provide a name with length between 5 and 15 characters.");
             }
