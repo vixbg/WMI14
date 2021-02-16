@@ -25,9 +25,14 @@ namespace WIM14.Commands
                 throw new ArgumentException("Team does not exist.");
             }
 
+            if(this.Database.Teams[desiredTeamIndex].Boards.Exists(board => board.Name == boardName))
+            {
+                throw new ArgumentException("Board already exists.");
+            }
+
             this.Database.Teams[desiredTeamIndex].AddBoard((Board)boardToAdd);
 
-            return $"Board {boardName} was added to {teamName}.";
+            return $"Board {boardName} was created and added to {teamName}.";
         }
     }
 }

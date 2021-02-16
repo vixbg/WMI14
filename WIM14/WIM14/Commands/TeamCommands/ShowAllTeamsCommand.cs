@@ -12,8 +12,9 @@ namespace WIM14.Commands
         }
         public override string Execute()
         {
-            //ToDo
-            throw new NotImplementedException();
+            return this.Database.Members.Count > 0
+                ? string.Join(Environment.NewLine, this.Database.Teams).Trim()
+                : "There are no registered teams.";
         }
     }
 }

@@ -29,6 +29,7 @@ namespace WIM14.Models
                 this.name = value;
             }
         }
+        public List<Member> Members { get; }
 
         public List<Board> Boards { get; }
 
@@ -62,6 +63,13 @@ namespace WIM14.Models
             List<IHistoryEntry> sortedList = teamActivity.OrderByDescending(historyEntry => historyEntry.Time).ToList();
 
             return string.Join(Environment.NewLine, sortedList); //TODO: make it pretty
+        }
+
+        public override string ToString()
+        {
+            return $"Team {this.Name} " +
+                   $"Members: {this.Members.Select(member => member.Name)}" +
+                   $"Boards: {this.Boards.Select(board => board.Name)}";
         }
 
         private void EnsureValidName(string value)

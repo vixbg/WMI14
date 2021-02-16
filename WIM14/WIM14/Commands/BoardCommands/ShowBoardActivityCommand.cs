@@ -28,7 +28,10 @@ namespace WIM14.Commands
                 throw new ArgumentException("Board does not exist.");
             }
 
-            return this.Database.Teams[desiredTeamIndex].Boards.Find(board => board.Name == boardName).ToString();
+            return string.Join(Environment.NewLine, this.Database.Teams[desiredTeamIndex].Boards
+                .Find(board => board.Name == boardName)
+                .ToString())
+                .Trim();
         }
     }
 }

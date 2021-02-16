@@ -21,7 +21,7 @@ namespace WIM14.Commands
                 throw new ArgumentException($"Member does not exist.");
             }
 
-            return this.Database.Members[desiredMemberIndex].ShowActivityHistory();
+            return this.Database.Members[desiredMemberIndex].ShowActivityHistory().Trim();
         }
     }
 }
