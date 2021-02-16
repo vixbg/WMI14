@@ -9,7 +9,7 @@ namespace WIM14.Models
 {
     public class Board : IBoard
     {
-        //TODO add workitem
+        //TODO add workitem //idk what whis is supposed to mean
         private const int MAX_LENGTH = 15;
         private const int MIN_LENGTH = 5;
         private readonly List<IWorkItem> workItems = new List<IWorkItem>(); 
@@ -39,7 +39,7 @@ namespace WIM14.Models
         {
             return string.Join(Environment.NewLine, this.activityHistory);
         }
-        protected void AddHistoryEntry(string desc)
+        public void AddHistoryEntry(string desc)
         {
             this.activityHistory.Add(new HistoryEntry(desc));
         }

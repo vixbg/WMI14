@@ -31,7 +31,7 @@ namespace WIM14.Commands
 
             this.Database.Teams[desiredTeamIndex].AddPerson((Member)desiredMember); //WHY CAST ?!
 
-            throw new NotImplementedException();
+            return $"Member {memberName} was added to team {teamName}.";
         }
     }
 }

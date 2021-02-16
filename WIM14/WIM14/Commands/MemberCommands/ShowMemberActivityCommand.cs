@@ -12,9 +12,16 @@ namespace WIM14.Commands
         }
         public override string Execute()
         {
-            var memberActivityist = this.Database.Members.Select(member => member.ShowActivityHistory());
+            string memberName = this.CommandParameters[0];
 
-            return string.Join(Environment.NewLine, memberActivityist);
+            var desiredMemberIndex = this.Database.Members.ToList().FindIndex(member => member.Name == memberName);
+
+            if(desiredMemberIndex == -1)
+            {
+                throw new ArgumentException($"Member does not exist.");
+            }
+
+            return this.Database.Members[desiredMemberIndex].ShowActivityHistory();
         }
     }
 }

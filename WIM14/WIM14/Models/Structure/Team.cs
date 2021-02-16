@@ -30,11 +30,19 @@ namespace WIM14.Models
             }
         }
 
+        public List<Board> Boards { get; }
+
         public void AddPerson(Member newMember)
         {
             this.members.Add(newMember);
             this.members.Last().AssignTeam(this.name);
             this.members.Last().AddHistoryEntry($"Member was added to team {this.Name}."); 
+        }
+
+        public void AddBoard (Board newBoard)
+        {
+            this.boards.Add(newBoard);
+            this.boards.Last().AddHistoryEntry($"Board was added to team {this.Name}.");
         }
 
         public string ShowTeamActivity()
