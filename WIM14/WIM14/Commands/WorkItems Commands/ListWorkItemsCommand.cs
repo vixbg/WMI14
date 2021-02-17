@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using WIM14.Commands.Abstracts;
+using WIM14.Models.Contracts;
 using WIM14.Models.Enums;
 using WIM14.Models.WorkItems;
 
@@ -17,78 +18,115 @@ namespace WIM14.Commands
         //list [BUG/STORY/FEEDBACK/ALL] [STATUS/ASSIGNEE] [Which Status/Assignee] [title/priority/severity/size/rating]
         public override string Execute()
         {
-            var allowedTypes = new List<string>() { "bug", "story", "feedback" };
-            var optionOne = new List<string>() { "status", "assignee" };
-            var orderBy = new List<string>() { "title", "priority", "severity", "size", "rating" };
-            string param1 = "all";
-            string param2 = "status";
-            Enum param3status = BugStatus.Active;
-            string param3name = "";
-            string param4 = "title";
+            var allowedTypes = new List<string>() {"bug", "story", "feedback", "all"};
+            var allowedSearchTypes = new List<string>() {"status", "assignee"};
+            var allowedOrders = new List<string>() {"title", "priority", "severity", "size", "rating"};
+            string type = "all";
+            string searchType = "";
+            string nameOrStatus = "";
+            string orderBy = "title";
 
             if (CommandParameters.Count > 0)
             {
-                param1 = CommandParameters[0].ToLower();
+                type = CommandParameters[0].ToLower();
+                if (!allowedTypes.Contains(type))
+                {
+                    throw new Exception($"Type {type} is not supported in the list command");
+                }
             }
+
             if (CommandParameters.Count > 1)
             {
-                param2 = CommandParameters[1].ToLower();
+                searchType = CommandParameters[1].ToLower();
+                if (!allowedSearchTypes.Contains(type))
+                {
+                    throw new Exception($"Search Type {searchType} is not supported in the list command");
+                }
             }
+
             if (CommandParameters.Count > 2)
             {
-                if (param2 == "status")
-                {
-                    param3status = (CommandParameters[0]) switch
-                    {
-                        "bug" => Enum.Parse<BugStatus>(CommandParameters[2]),
-                        "story" => Enum.Parse<StoryStatus>(CommandParameters[2]),
-                        "feedback" => Enum.Parse<FeedbackStatus>(CommandParameters[2]),
-                        _ => throw new ArgumentException("Invalid Status.")
-                    };
-                }
-                else if (param2 == "assignee")
-                {
-                    var assigneeFoud = this.Database.Members.ToList().FirstOrDefault(p => p.Name == CommandParameters[2]);
-                    if ((assigneeFoud == null))
-                    {
-                        throw new ArgumentNullException("No assignee found with that name.");
-                    }
-                    param3name = assigneeFoud.Name;
-                }
-               
+                nameOrStatus = CommandParameters[2].ToLower();
             }
+
             if (CommandParameters.Count > 3)
             {
-                param4 = CommandParameters[3].ToLower();
+                orderBy = CommandParameters[3];
+                if (!allowedOrders.Contains(type))
+                {
+                    throw new Exception($"Order by {orderBy} is not supported in the list command");
+                }
             }
 
-            var workItems = param1 switch
+            if (searchType == "status")
             {
-                "bug"=> this.Database.WorkItems.Where(b => b.GetType().Name.ToLower() == "bug" ).ToList(),
+                Enum status = (type) switch
+                {
+                    "bug" => Enum.Parse<BugStatus>(nameOrStatus),
+                    "story" => Enum.Parse<StoryStatus>(nameOrStatus),
+                    "feedback" => Enum.Parse<FeedbackStatus>(nameOrStatus),
+                    _ => throw new ArgumentException("Invalid Status.")
+                };
+            }
+            else
+            {
+                var assigneeFound = this.Database.Members.ToList().FirstOrDefault(p => p.Name == nameOrStatus);
+                if ((assigneeFound == null))
+                {
+                    throw new ArgumentNullException("No assignee found with that name.");
+                }
+            }
 
-                "story"=> this.Database.WorkItems.Where(s => s.GetType().Name.ToLower() == "story").ToList(),
+            var workItems = type switch
+            {
+                "bug"=> this.Database.WorkItems.Where(b => b is IBug ),
 
-                "feedback" => this.Database.WorkItems.Where(f => f.GetType().Name.ToLower() == "feedback").ToList(),
+                "story"=> this.Database.WorkItems.Where(s => s is IStory),
 
-                "all" => this.Database.WorkItems.ToList(),
+                "feedback" => this.Database.WorkItems.Where(f => f is IStory),
+
+                "all" => this.Database.WorkItems.AsQueryable(),
 
                 _=> throw new ArgumentException("Invalid command parameter.")
 
             };
 
-            workItems = param2 switch
+            workItems = searchType switch
             {
-                "status" => workItems.Where(b => b.GetType().Name.ToLower() == "bug").ToList(),
+                "status" => workItems.Where(i => i.StatusString == nameOrStatus ),
 
-                "assignee" => this.Database.WorkItems.Where(s => s.GetType().Name.ToLower() == "story").ToList(),
+                "assignee" => workItems.Where(i => 
+                    (i is IBug bug && bug.Assignee.Name == nameOrStatus) || 
+                    (i is IStory story && story.Assignee.Name == nameOrStatus)),
+
+                "" => workItems.AsQueryable(),
 
                 _ => throw new ArgumentException("Invalid command parameter.")
-
             };
 
+            var finalList = orderBy switch
+            {
+                "title" => workItems.OrderBy(i => i.Title),
+                "priority" => workItems.Where(i => i is IPriority).OrderBy(i => ((IPriority) i).Priority),
+                "severity" => workItems.Where(i => i is IBug).OrderBy(i => ((IBug)i).Severity),
+                "size" => workItems.Where(i => i is IStory).OrderBy(i => ((IStory)i).Size),
+                "rating" => workItems.Where(i => i is IFeedback).OrderBy(i => ((IFeedback) i).Rating)
+            };
 
+            var sortedList = finalList.ToList();
+            if (sortedList.Count == 0)
+            {
+                return "No items found with those parameters.";
+            }
 
+            var sb = new StringBuilder();
+            sb.AppendLine($"Sorted by [Type: {type}] and [Search Type: {searchType}] in [order: {orderBy}]");
+            foreach (var item in sortedList)
+            {
+                sb.AppendLine(item.ToString());
+            }
 
+            return sb.ToString().Trim();
         }
     }
 }

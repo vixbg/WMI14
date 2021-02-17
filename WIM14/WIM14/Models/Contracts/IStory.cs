@@ -5,9 +5,8 @@ using WIM14.Models.Enums;
 
 namespace WIM14.Models.Contracts
 {
-    public interface IStory : IWorkItem, IWorkItemStatus<StoryStatus>
+    public interface IStory : IWorkItem, IWorkItemStatus<StoryStatus>, IPriority
     {
-        Priority Priority { get; set; }
         Size Size { get; set; }
         IMember Assignee { get; }
     }

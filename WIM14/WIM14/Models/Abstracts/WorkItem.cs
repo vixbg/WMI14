@@ -52,6 +52,8 @@ namespace WIM14.Models.Abstracts
 
         public T Status { get; set; }
 
+        public string StatusString => Status.ToString();
+
         public virtual string EnsureValidString(string value, int min, int max, string type)
         {
             if (value.Length < min || value.Length > max)
