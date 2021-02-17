@@ -9,7 +9,6 @@ namespace WIM14.Models
 {
     public class Member : IMember
     {
-        //TODO: add workitem // molq??
         private const int MAX_LENGTH = 15;
         private const int MIN_LENGTH = 5;
         private readonly List<IWorkItem> workItems = new List<IWorkItem>(); 
@@ -43,6 +42,32 @@ namespace WIM14.Models
             else
             {
                 throw new ArgumentException($"Member {this.Name} is already in another team.");
+            }
+        }
+
+        public string AssignWorkItem(IWorkItem item)
+        {
+            if(this.workItems.Contains(item))
+            {
+                return $"{item.GetType().Name} {item.Title} is already added to {this.Name}'s list of work items.";
+            }
+            else
+            {
+                this.workItems.Add(item);
+                return $"{item.GetType().Name} {item.Title} was successfully added to {this.Name}'s list of work items.";
+            }
+        }
+
+        public string UnassignWorkItem(IWorkItem item)
+        {
+            if (!this.workItems.Contains(item))
+            {
+                return $"{item.GetType().Name} {item.Title} was not found.";
+            }
+            else
+            {
+                this.workItems.Remove(item);
+                return $"{item.GetType().Name} {item.Title} was removed from {this.Name}'s list of work items.";
             }
         }
         public override string ToString()

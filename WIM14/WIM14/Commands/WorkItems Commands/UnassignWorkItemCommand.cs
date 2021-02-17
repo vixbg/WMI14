@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using WIM14.Commands.Abstracts;
 
@@ -12,8 +13,33 @@ namespace WIM14.Commands
         }
         public override string Execute()
         {
-            //ToDo
-            throw new NotImplementedException();
+            if (this.CommandParameters.Count < 1 || this.CommandParameters.Count > 2)
+            {
+                throw new ArgumentException("Not enough parameters. Please provide ID of a work item and a member's name.");
+            }
+
+            int workItemID;
+            string memberName;
+
+            try
+            {
+                int.TryParse(this.CommandParameters[0], out workItemID);
+                memberName = this.CommandParameters[1];
+            }
+            catch (Exception)
+            {
+                throw new ArgumentException("Failed to parse Assign parameters.");
+            }
+
+            if (workItemID < 0 || workItemID > this.Database.WorkItems.Count)
+            {
+                throw new ArgumentException($"Please provide ID within 0 and {this.Database.WorkItems.Count}");
+            }
+
+            var workItemToAssign = this.Database.WorkItems[workItemID];
+            var memberIndex = this.Database.Members.ToList().FindIndex(member => member.Name == memberName);
+
+            return this.Database.Members[memberIndex].UnassignWorkItem(workItemToAssign);
         }
     }
 }
