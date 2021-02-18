@@ -23,12 +23,16 @@ namespace WIM14.Commands
             {
                 //TODO: Validations
                 id = int.Parse(this.CommandParameters[0]);
-                bug = (IBug)this.Database.WorkItems.First(b => b.Id == id);
+                bug = this.Database.WorkItems.FirstOrDefault(b => b.Id == id) as IBug;
                 newSeverity = Enum.Parse<Severity>(this.CommandParameters[1]);
             }
             catch
             {
                 throw new ArgumentException("Failed to parse ChangeBugSeverity command parameters.");
+            }
+            if (bug == null)
+            {
+                throw new Exception($"No bug was found with id {id}");
             }
             previouSeverity = bug.Severity;
             bug.Severity = newSeverity;

@@ -7,10 +7,9 @@ namespace WIM14.Models.Collections
 {
     class Comment: IComment
     {
-        public Comment(IMember author, string message)
+        public Comment()
         {
-            this.Author = author;
-            this.Message = message;
+           
         }
 
         public IMember Author { get; set; }

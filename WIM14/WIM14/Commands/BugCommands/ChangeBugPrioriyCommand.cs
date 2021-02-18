@@ -23,12 +23,16 @@ namespace WIM14.Commands
             {
                 //TODO: Validations
                 id = int.Parse(this.CommandParameters[0]);
-                bug = (IBug)this.Database.WorkItems.First(b => b.Id == id);
+                bug = this.Database.WorkItems.FirstOrDefault(b => b.Id == id) as IBug;
                 newPriority = Enum.Parse<Priority>(this.CommandParameters[1]);
             }
             catch
             {
                 throw new ArgumentException("Failed to parse ChangeBugPriority command parameters.");
+            }
+            if (bug == null)
+            {
+                throw new Exception($"No bug was found with id {id}");
             }
             previouPriority = bug.Priority;
             bug.Priority = newPriority;

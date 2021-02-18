@@ -23,12 +23,16 @@ namespace WIM14.Commands
             {
                 //TODO: Validations
                 id = int.Parse(this.CommandParameters[0]);
-                feedback = (IFeedback)this.Database.WorkItems.First(f => f.Id == id);
+                feedback = this.Database.WorkItems.FirstOrDefault(f => f.Id == id) as IFeedback;
                 newStatus = Enum.Parse<FeedbackStatus>(this.CommandParameters[1]);
             }
             catch
             {
                 throw new ArgumentException("Failed to parse ChangeFeedbackStatus command parameters.");
+            }
+            if (feedback == null)
+            {
+                throw new Exception($"No feedback was found with id {id}");
             }
             previouStatus = feedback.Status;
             feedback.Status = newStatus;

@@ -23,12 +23,16 @@ namespace WIM14.Commands
             {
                 //TODO: Validations
                 id = int.Parse(this.CommandParameters[0]);
-                story = (IStory)this.Database.WorkItems.First(s => s.Id == id);
+                story = this.Database.WorkItems.FirstOrDefault(s => s.Id == id) as IStory;
                 newPriority = Enum.Parse<Priority>(this.CommandParameters[1]);
             }
             catch
             {
                 throw new ArgumentException("Failed to parse ChangeStoryPriority command parameters.");
+            }
+            if (story == null)
+            {
+                throw new Exception($"No story was found with id {id}");
             }
             previouPriority = story.Priority;
             story.Priority = newPriority;

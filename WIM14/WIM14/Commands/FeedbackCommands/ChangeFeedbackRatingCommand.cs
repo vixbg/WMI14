@@ -22,12 +22,16 @@ namespace WIM14.Commands
             try
             {
                 id = int.Parse(this.CommandParameters[0]);
-                feedback = (IFeedback)this.Database.WorkItems.First(f => f.Id == id);
+                feedback = this.Database.WorkItems.FirstOrDefault(f => f.Id == id) as IFeedback;
                 newRating = int.Parse(this.CommandParameters[1]);
             }
             catch 
             {
                 throw new ArgumentException("Failed to parse ChangeFeedbackRating command parameters.");
+            }
+            if (feedback == null)
+            {
+                throw new Exception($"No feedback was found with id {id}");
             }
 
             previousRating = feedback.Rating;
