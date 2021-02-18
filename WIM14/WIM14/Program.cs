@@ -1,4 +1,5 @@
 ﻿using System;
+using WIM14.Core;
 
 namespace WIM14
 {
@@ -6,7 +7,7 @@ namespace WIM14
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Engine.Instance.Run();
         }
     }
 }

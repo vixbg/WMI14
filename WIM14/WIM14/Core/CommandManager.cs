@@ -19,7 +19,7 @@ namespace WIM14.Core
             string commandName = lineParameters[0];
             List<string> commandParameters = lineParameters.Skip(1).ToList();
 
-            return commandLine switch
+            return commandName switch
             {
                 //board
                 "createboard" => new CreateBoardCommand(commandParameters),

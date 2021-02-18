@@ -11,13 +11,15 @@ namespace WIM14.Models
 {
     public class Team : ITeam
     {
-        private readonly List<Member> members = new List<Member>(); 
-        private readonly List<Board> boards = new List<Board>();
+        private readonly List<IMember> members = new List<IMember>(); 
+        private readonly List<IBoard> boards = new List<IBoard>();
         private string name;
 
         public Team(string newName)
         {
             this.Name = newName;
+            this.Boards = boards;
+            this.Members = members;
         }
 
         public string Name 
@@ -29,18 +31,18 @@ namespace WIM14.Models
                 this.name = value;
             }
         }
-        public List<Member> Members { get; }
+        public List<IMember> Members { get; }
 
-        public List<Board> Boards { get; }
+        public List<IBoard> Boards { get; }
 
-        public void AddPerson(Member newMember)
+        public void AddPerson(IMember newMember)
         {
             this.members.Add(newMember);
-            this.members.Last().AssignTeam(this.name);
+            this.members.Last().AssignedTeam = this.Name;
             this.members.Last().AddHistoryEntry($"Member was added to team {this.Name}."); 
         }
 
-        public void AddBoard (Board newBoard)
+        public void AddBoard (IBoard newBoard)
         {
             this.boards.Add(newBoard);
             this.boards.Last().AddHistoryEntry($"Board was added to team {this.Name}.");

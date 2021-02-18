@@ -13,6 +13,7 @@ namespace WIM14.Models
         private const int MIN_LENGTH = 5;
         private readonly List<IWorkItem> workItems = new List<IWorkItem>(); 
         private readonly List<IHistoryEntry> activityHistory = new List<IHistoryEntry>();
+        private string assignedTeam;
 
         public Member(string newName)
         {
@@ -30,20 +31,23 @@ namespace WIM14.Models
             get => this.activityHistory;
         }
 
-        //tova neshto ne mi dava da go sloja v IMember?
-        public string AssignedTeam { get; private set; } = "";
+        
+        public string AssignedTeam { 
+            get => this.assignedTeam;
 
-        public void AssignTeam(string teamName)
-        {
-            if (this.AssignedTeam == "")
+            set
             {
-                this.AssignedTeam = teamName;
-            }
-            else
-            {
-                throw new ArgumentException($"Member {this.Name} is already in another team.");
+                if (this.assignedTeam is null)
+                {
+                    this.assignedTeam = value;
+                }
+                else
+                {
+                    throw new ArgumentException($"Member {this.Name} is already in another team.");
+                }
             }
         }
+
 
         public string AssignWorkItem(IWorkItem item)
         {

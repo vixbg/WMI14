@@ -29,7 +29,7 @@ namespace WIM14.Commands
                 throw new ArgumentException($"Team with name {teamName} does not exist.");
             }
 
-            this.Database.Teams[desiredTeamIndex].AddPerson((Member)desiredMember); //WHY CAST ?!
+            this.Database.Teams[desiredTeamIndex].AddPerson(desiredMember);
 
             return $"Member {memberName} was added to team {teamName}.";
         }

@@ -24,7 +24,7 @@ namespace WIM14.Commands
 
             this.Database.Teams.Add(newMember);
 
-            return $"Team with ID {this.Database.Members.Count - 1} was created.";
+            return $"Team with ID {this.Database.Members.Count + 1} was created.";
         }
     }
 }

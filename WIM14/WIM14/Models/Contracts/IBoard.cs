@@ -6,5 +6,6 @@ namespace WIM14.Models.Contracts
     {
         public string Name { get; set; } 
         public string ShowActivityHistory();
+        void AddHistoryEntry(string v);
     }
 }

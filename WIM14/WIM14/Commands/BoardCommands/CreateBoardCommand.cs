@@ -8,7 +8,8 @@ using WIM14.Models;
 namespace WIM14.Commands
 {
     public class CreateBoardCommand : Command
-    {
+    { 
+        //createboard [BOARDNAME] [TEAMNAME]
         public CreateBoardCommand(List<string> commandParameters) : base(commandParameters)
         {
         }
@@ -16,23 +17,26 @@ namespace WIM14.Commands
         {
             string boardName = this.CommandParameters[0];
             string teamName = this.CommandParameters[1];
+            var team = this.Database.Teams.FirstOrDefault(t => t.Name == teamName);
+            
+            var newBoard = this.Factory.CreateBoard(boardName);
+            //var desiredTeamIndex = this.Database.Teams.ToList().FindIndex(team => team.Name == teamName);
 
-            var boardToAdd = this.Factory.CreateBoard(boardName);
-            var desiredTeamIndex = this.Database.Teams.ToList().FindIndex(team => team.Name == teamName);
-
-            if(desiredTeamIndex == -1)
+            if(team == null)
             {
                 throw new ArgumentException("Team does not exist.");
             }
 
-            if(this.Database.Teams[desiredTeamIndex].Boards.Exists(board => board.Name == boardName))
+            //var existingBoardName = team.Boards.Exists(board => board.Name == boardName);
+
+            if (team.Boards.Contains(newBoard))
             {
                 throw new ArgumentException("Board already exists.");
             }
 
-            this.Database.Teams[desiredTeamIndex].AddBoard((Board)boardToAdd);
+            team.AddBoard(newBoard);
 
-            return $"Board {boardName} was created and added to {teamName}.";
+            return $"Board {boardName} was created and added in team {teamName}.";
         }
     }
 }

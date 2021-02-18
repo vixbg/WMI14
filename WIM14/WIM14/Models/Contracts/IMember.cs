@@ -9,6 +9,8 @@ namespace WIM14.Models.Contracts
     {
         public string Name { get; }
         public List<IHistoryEntry> ActivityHistory { get; }
+        string AssignedTeam { get; set; }
+
         public string AssignWorkItem(IWorkItem item);
         public string UnassignWorkItem(IWorkItem item);
         public string ShowActivityHistory();
