@@ -8,6 +8,7 @@ namespace WIM14.Commands
 {
     class CreateMemberCommand : Command
     {
+        //createmember [MEMBERNAME] 
         public CreateMemberCommand(IList<string> commandParameters) : base(commandParameters)
         {
         }
@@ -24,7 +25,7 @@ namespace WIM14.Commands
 
             this.Database.Members.Add(newMember);
 
-            return $"Member with ID {this.Database.Members.Count - 1} was created.";
+            return $"Member with ID {this.Database.Members.Count} was created.";
         }
     }
 }

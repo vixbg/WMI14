@@ -19,7 +19,7 @@ namespace WIM14.Models
         {
             this.EnsureValidName(newName);
             this.Name = newName;
-            this.AddHistoryEntry($"{this.GetType().Name} with name {this.Name} was created.");
+            this.AddHistoryEntry($"{this.GetType().Name} {this.Name} was created.");
         }
         public string Name
         {

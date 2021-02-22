@@ -15,14 +15,14 @@ namespace WIM14.Commands
         {
             string memberName = this.CommandParameters[0];
 
-            var desiredMemberIndex = this.Database.Members.ToList().FindIndex(member => member.Name == memberName);
+            var member = this.Database.Members.ToList().Find(member => member.Name == memberName);
 
-            if(desiredMemberIndex == -1)
+            if(member == null)
             {
                 throw new ArgumentException($"Member does not exist.");
             }
 
-            return this.Database.Members[desiredMemberIndex].ShowActivityHistory().Trim();
+            return member.ShowActivityHistory().Trim();
         }
     }
 }

@@ -8,7 +8,7 @@ namespace WIM14.Commands
 {
     class ShowBoardActivityCommand : Command
     {
-        //showboard [BOARDNAME] [TEAMNAME]
+        //showboardactivity [BOARDNAME] [TEAMNAME]
         public ShowBoardActivityCommand(IList<string> commandParameters) : base(commandParameters)
         {
         }
@@ -17,19 +17,19 @@ namespace WIM14.Commands
             string boardName = this.CommandParameters[0];
             string teamName = this.CommandParameters[1];
 
-            var desiredTeamIndex = this.Database.Teams.ToList().FindIndex(team => team.Name == teamName);
+            var team = this.Database.Teams.ToList().Find(t => t.Name == teamName);
 
-            if (desiredTeamIndex == -1)
+            if (team == null)
             {
                 throw new ArgumentException("Team does not exist.");
             }
 
-            if (!this.Database.Teams[desiredTeamIndex].Boards.Exists(board => board.Name == boardName))
+            if (!team.Boards.Exists(board => board.Name == boardName))
             {
                 throw new ArgumentException("Board does not exist.");
             }
 
-            return string.Join(Environment.NewLine, this.Database.Teams[desiredTeamIndex].Boards
+            return string.Join(Environment.NewLine, team.Boards
                 .Find(board => board.Name == boardName)
                 .ToString())
                 .Trim();

@@ -8,6 +8,7 @@ namespace WIM14.Commands
 {
     class ShowTeamActivityCommand : Command
     {
+        //showteamactivity [TEAMNAME]
         public ShowTeamActivityCommand(IList<string> commandParameters) : base(commandParameters)
         {
         }
@@ -15,14 +16,14 @@ namespace WIM14.Commands
         {
             string teamName = this.CommandParameters[0];
 
-            var desiredTeamIndex = this.Database.Teams.ToList().FindIndex(team => team.Name == teamName);
+            var team = this.Database.Teams.ToList().Find(t => t.Name == teamName);
 
-            if (desiredTeamIndex == -1)
+            if (team == null)
             {
                 throw new ArgumentException($"Team does not exist.");
             }
 
-            return this.Database.Teams[desiredTeamIndex].ShowTeamActivity().Trim();
+            return team.ShowTeamActivity().Trim();
         }
     }
 }

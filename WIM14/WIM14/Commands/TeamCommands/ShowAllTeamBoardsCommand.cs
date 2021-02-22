@@ -8,6 +8,7 @@ namespace WIM14.Commands
 {
     class ShowAllTeamBoardsCommand : Command
     {
+        //showallteamboards [TEAMNAME]
         public ShowAllTeamBoardsCommand(IList<string> commandParameters) : base(commandParameters)
         {
         }
@@ -15,14 +16,14 @@ namespace WIM14.Commands
         {
             string teamName = this.CommandParameters[0];
 
-            if (!this.Database.Members.ToList().Exists(team => team.Name == teamName))
+            if (!this.Database.Teams.ToList().Exists(t => t.Name == teamName))
             {
                 throw new ArgumentException($"Team does not exist.");
             }
             
-            var desiredTeamIndex = this.Database.Members.ToList().FindIndex(team => team.Name == teamName);
+            var team = this.Database.Teams.ToList().Find(t => t.Name == teamName);
 
-            return string.Join(Environment.NewLine, this.Database.Teams[desiredTeamIndex].Boards).Trim();
+            return string.Join(Environment.NewLine, team.Boards).Trim();
         }
     }
 }

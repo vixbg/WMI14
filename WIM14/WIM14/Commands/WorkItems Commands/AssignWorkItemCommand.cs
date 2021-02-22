@@ -37,9 +37,11 @@ namespace WIM14.Commands
             }
 
             var workItemToAssign = this.Database.WorkItems[workItemID];
-            var memberIndex = this.Database.Members.ToList().FindIndex(member => member.Name == memberName);
+            var member = this.Database.Members.ToList().Find(member => member.Name == memberName);
 
-            return this.Database.Members[memberIndex].AssignWorkItem(workItemToAssign);
+            member.AssignWorkItem(workItemToAssign);
+
+            return $"{workItemToAssign.GetType().Name} {workItemToAssign.Title} was assigned to member {member.Name}.";
         }
     }
 }

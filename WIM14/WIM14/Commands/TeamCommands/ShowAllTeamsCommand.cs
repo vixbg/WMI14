@@ -5,6 +5,7 @@ using WIM14.Commands.Abstracts;
 
 namespace WIM14.Commands
 {
+    //showallteams
     class ShowAllTeamsCommand : Command
     {
         public ShowAllTeamsCommand(IList<string> commandParameters) : base(commandParameters)

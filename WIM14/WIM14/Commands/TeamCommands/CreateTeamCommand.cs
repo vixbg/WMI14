@@ -6,6 +6,7 @@ using WIM14.Models.Contracts;
 
 namespace WIM14.Commands
 {
+    //createteam [TEAMNAME]
     class CreateTeamCommand : Command
     {
         public CreateTeamCommand(IList<string> commandParameters) : base(commandParameters)

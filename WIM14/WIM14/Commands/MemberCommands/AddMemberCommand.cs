@@ -8,7 +8,7 @@ namespace WIM14.Commands
 {
     class AddMemberCommand : Command
     {
-        //createboard [MEMBERNAME] [TEAMNAME]
+        //addmember [MEMBERNAME] [TEAMNAME]
         public AddMemberCommand(IList<string> commandParameters) : base(commandParameters)
         {
         }
@@ -17,20 +17,20 @@ namespace WIM14.Commands
             string memberName = this.CommandParameters[0];
             string teamName = this.CommandParameters[1];
 
-            var desiredMember = this.Database.Members.ToList().Find(member => member.Name == memberName);
-            var desiredTeamIndex = this.Database.Teams.ToList().FindIndex(team => team.Name == teamName);
+            var member = this.Database.Members.ToList().Find(m => m.Name == memberName);
+            var team = this.Database.Teams.ToList().Find(t => t.Name == teamName);
 
-            if (desiredMember == null)
+            if (member == null)
             {
                 throw new ArgumentException($"Member with name {memberName} does not exist.");
             }
 
-            if (desiredTeamIndex == -1)
+            if (team == null)
             {
                 throw new ArgumentException($"Team with name {teamName} does not exist.");
             }
 
-            this.Database.Teams[desiredTeamIndex].AddPerson(desiredMember);
+            team.AddPerson(member);
 
             return $"Member {memberName} was added to team {teamName}.";
         }

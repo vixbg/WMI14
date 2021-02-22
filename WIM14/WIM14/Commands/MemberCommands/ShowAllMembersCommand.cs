@@ -6,6 +6,7 @@ namespace WIM14.Commands
 {
     class ShowAllMembersCommand : Command
     {
+        //showallmembers 
         public ShowAllMembersCommand(IList<string> commandParameters) : base(commandParameters)
         {
         }
