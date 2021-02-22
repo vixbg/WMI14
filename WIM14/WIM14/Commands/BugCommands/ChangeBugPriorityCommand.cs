@@ -8,9 +8,9 @@ using WIM14.Models.Enums;
 
 namespace WIM14.Commands
 {
-    class ChangeBugPrioriyCommand : Command
+    class ChangeBugPriorityCommand : Command
     {
-        public ChangeBugPrioriyCommand(IList<string> commandParameters) : base(commandParameters)
+        public ChangeBugPriorityCommand(IList<string> commandParameters) : base(commandParameters)
         {
         }
         public override string Execute()
@@ -22,6 +22,7 @@ namespace WIM14.Commands
             try
             {
                 //TODO: Validations
+                
                 id = int.Parse(this.CommandParameters[0]);
                 bug = this.Database.WorkItems.FirstOrDefault(b => b.Id == id) as IBug;
                 newPriority = Enum.Parse<Priority>(this.CommandParameters[1]);

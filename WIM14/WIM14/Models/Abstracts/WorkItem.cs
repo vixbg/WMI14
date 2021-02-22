@@ -8,7 +8,7 @@ using WIM14.Models.Contracts;
 
 namespace WIM14.Models.Abstracts
 {
-    class WorkItem<T> : IWorkItem, IWorkItemStatus<T> where T : Enum 
+    public class WorkItem<T> : IWorkItem, IWorkItemStatus<T> where T : Enum 
     {
         private string title;
         private string description;

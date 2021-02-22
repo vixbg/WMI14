@@ -1,5 +1,4 @@
-﻿using System;
-using WIM14.Core;
+﻿using WIM14.Core;
 
 namespace WIM14
 {

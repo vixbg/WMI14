@@ -8,7 +8,7 @@ using Type = WIM14.Models.Enums.Type;
 
 namespace WIM14.Models.WorkItems
 {
-    class Bug : Abstracts.WorkItem<BugStatus>, IBug, IType
+    public class Bug : Abstracts.WorkItem<BugStatus>, IBug, IType
     {
         private readonly Type type = Type.Bug;
         private Severity severity;

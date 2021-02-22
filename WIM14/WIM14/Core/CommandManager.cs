@@ -25,7 +25,7 @@ namespace WIM14.Core
                 "createboard" => new CreateBoardCommand(commandParameters),
                 "showboardactivity" => new ShowBoardActivityCommand(commandParameters),
                 //bug
-                "changebugpriority" => new ChangeBugPrioriyCommand(commandParameters),
+                "changebugpriority" => new ChangeBugPriorityCommand(commandParameters),
                 "changebugseverity" => new ChangeBugSeverityCommand(commandParameters),
                 "changebugstatus" => new ChangeBugStatusCommand(commandParameters),
                 "createbug" => new CreateBugCommand(commandParameters),
