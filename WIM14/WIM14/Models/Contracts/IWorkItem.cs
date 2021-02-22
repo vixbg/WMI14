@@ -18,5 +18,6 @@ namespace WIM14.Models.Contracts
         public string Title { get; set; }
         public string Description { get; set; }
         public string StatusString { get; }
+        void AddHistoryItem(string description);
     }
 }

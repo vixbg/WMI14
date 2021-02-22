@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using WIM14.Core;
 using WIM14.Models.Contracts;
 using WIM14.Models.Enums;
 using Type = WIM14.Models.Enums.Type;
@@ -23,9 +24,15 @@ namespace WIM14.Models.WorkItems
         public int Rating
         {
             get => rating;
-            set => rating = ValidateRating(value);
+            set
+            {
+                rating = ValidateRating(value);
+                AddHistoryItem($"Feedback rating changed to {value}.");
+            } 
+
         }
 
+        
         private int ValidateRating(int value)
         {
             if (value < 0 || value > 5)

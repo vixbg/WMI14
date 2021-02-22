@@ -10,6 +10,9 @@ namespace WIM14.Models.WorkItems
     class Story : Abstracts.WorkItem<StoryStatus>, IStory, IType
     {
         private Type type = Type.Story;
+        private Priority priority;
+        private Size size;
+        private IMember assginee;
 
         public Story(string title, string description, Priority priority, Size size) : base(title, description)
         {
@@ -20,11 +23,38 @@ namespace WIM14.Models.WorkItems
 
         public Type Type => type;
 
-        public Priority Priority { get; set; }
+        public Priority Priority
+        {
+            get => this.priority;
+            set
+            {
+                AddHistoryItem($"Priority changed from {this.Priority} to {value}");
+                this.priority = value;
 
-        public Size Size { get; set; }
+            }
+        }
 
-        public IMember Assignee { get; set; }
+        public Size Size
+        {
+            get => this.size;
+            set
+            {
+                AddHistoryItem($"Size changed from {this.Priority} to {value}");
+                this.size = value;
+
+            }
+        }
+
+        public IMember Assignee
+        {
+            get => this.assginee;
+            set
+            {
+
+                this.assginee = value;
+                AddHistoryItem($"Assignee {value} added.");
+            }
+        }
 
         public override string ToString()
         {
