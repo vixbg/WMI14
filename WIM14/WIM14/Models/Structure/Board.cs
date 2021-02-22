@@ -9,7 +9,6 @@ namespace WIM14.Models
 {
     public class Board : IBoard
     {
-        //TODO add workitem //idk what whis is supposed to mean
         private const int MAX_LENGTH = 15;
         private const int MIN_LENGTH = 5;
         private readonly List<IWorkItem> workItems = new List<IWorkItem>(); 
@@ -42,6 +41,19 @@ namespace WIM14.Models
         public void AddHistoryEntry(string desc)
         {
             this.activityHistory.Add(new HistoryEntry(desc));
+        }
+
+        public void AddWorkItem(IWorkItem item)
+        {
+            if(!this.workItems.Contains(item))
+            {
+                this.workItems.Add(item);
+                this.AddHistoryEntry($"{item.GetType().Name} {item.Title} was added to board {this.Name}.");
+            }
+            else
+            {
+                throw new ArgumentException($"{item.GetType().Name} {item.Title} has already been added to board {this.Name}.");
+            }
         }
         private void EnsureValidName(string value)
         {

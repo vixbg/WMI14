@@ -37,15 +37,29 @@ namespace WIM14.Models
 
         public void AddPerson(IMember newMember)
         {
-            this.members.Add(newMember);
-            this.members.Last().AssignedTeam = this.Name;
-            this.members.Last().AddHistoryEntry($"Member was added to team {this.Name}."); 
+            if (!this.members.Contains(newMember))
+            {
+                newMember.AssignedTeam = this.Name;
+                newMember.AddHistoryEntry($"{newMember.GetType().Name} {newMember.Name} was added to team {this.Name}.");
+                this.members.Add(newMember);
+            }
+            else
+            {
+                throw new ArgumentException($"{newMember.GetType().Name} {newMember.Name} is already added to team {this.Name}.");
+            }
         }
 
         public void AddBoard (IBoard newBoard)
         {
-            this.boards.Add(newBoard);
-            this.boards.Last().AddHistoryEntry($"Board was added to team {this.Name}.");
+            if (!this.boards.Contains(newBoard))
+            {
+                newBoard.AddHistoryEntry($"{newBoard.GetType().Name} {newBoard.Name} was added to team {this.Name}.");
+                this.boards.Add(newBoard);
+            }
+            else
+            {
+                throw new ArgumentException($"{newBoard.GetType().Name} {newBoard.Name} is already added to team {this.Name}.");
+            }
         }
 
         public string ShowTeamActivity()
@@ -64,7 +78,7 @@ namespace WIM14.Models
 
             List<IHistoryEntry> sortedList = teamActivity.OrderByDescending(historyEntry => historyEntry.Time).ToList();
 
-            return string.Join(Environment.NewLine, sortedList); //TODO: make it pretty
+            return string.Join(Environment.NewLine, sortedList); 
         }
 
         public override string ToString()

@@ -8,6 +8,7 @@ namespace WIM14.Commands
 {
     class AddMemberCommand : Command
     {
+        //createboard [MEMBERNAME] [TEAMNAME]
         public AddMemberCommand(IList<string> commandParameters) : base(commandParameters)
         {
         }

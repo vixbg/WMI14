@@ -49,29 +49,29 @@ namespace WIM14.Models
         }
 
 
-        public string AssignWorkItem(IWorkItem item)
+        public void AssignWorkItem(IWorkItem item)
         {
-            if(this.workItems.Contains(item))
+            if(!this.workItems.Contains(item))
             {
-                return $"{item.GetType().Name} {item.Title} is already added to {this.Name}'s list of work items.";
+                this.workItems.Add(item);
+                this.AddHistoryEntry($"{item.GetType().Name} {item.Title} was assigned to member {this.Name}.");
             }
             else
             {
-                this.workItems.Add(item);
-                return $"{item.GetType().Name} {item.Title} was successfully added to {this.Name}'s list of work items.";
+                throw new ArgumentException($"{item.GetType().Name} {item.Title} is already assigned to member {this.Name}.");
             }
         }
 
-        public string UnassignWorkItem(IWorkItem item)
+        public void UnassignWorkItem(IWorkItem item)
         {
-            if (!this.workItems.Contains(item))
+            if(this.workItems.Contains(item))
             {
-                return $"{item.GetType().Name} {item.Title} was not found.";
+                this.workItems.Remove(item);
+                this.AddHistoryEntry($"{item.GetType().Name} {item.Title} was unassigned from member {this.Name}.");
             }
             else
             {
-                this.workItems.Remove(item);
-                return $"{item.GetType().Name} {item.Title} was removed from {this.Name}'s list of work items.";
+                throw new ArgumentException($"{item.GetType().Name} {item.Title} was not found.");
             }
         }
         public override string ToString()

@@ -11,8 +11,8 @@ namespace WIM14.Models.Contracts
         public List<IHistoryEntry> ActivityHistory { get; }
         string AssignedTeam { get; set; }
 
-        public string AssignWorkItem(IWorkItem item);
-        public string UnassignWorkItem(IWorkItem item);
+        public void AssignWorkItem(IWorkItem item);
+        public void UnassignWorkItem(IWorkItem item);
         public string ShowActivityHistory();
         public void AddHistoryEntry(string desc);
 

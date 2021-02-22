@@ -7,6 +7,7 @@ namespace WIM14.Commands
 {
     class ShowMemberActivityCommand : Command
     {
+        //showmemberactivity [MEMBERNAME]
         public ShowMemberActivityCommand(IList<string> commandParameters) : base(commandParameters)
         {
         }
