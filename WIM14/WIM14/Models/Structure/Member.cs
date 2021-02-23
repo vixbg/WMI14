@@ -7,6 +7,10 @@ using Type = WIM14.Models.Enums.Type;
 
 namespace WIM14.Models
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <seealso cref="WIM14.Models.Contracts.IMember" />
     public class Member : IMember
     {
         private const int MAX_LENGTH = 15;
@@ -15,26 +19,42 @@ namespace WIM14.Models
         private readonly List<IHistoryEntry> activityHistory = new List<IHistoryEntry>();
         private string assignedTeam;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Member"/> class.
+        /// </summary>
+        /// <param name="newName">The new name.</param>
         public Member(string newName)
         {
             this.EnsureValidName(newName);
             this.Name = newName;
             this.AddHistoryEntry($"{this.GetType().Name} {this.Name} was created.");
         }
+        /// <summary>
+        /// Gets the name.
+        /// </summary>
         public string Name
         {
             get;
         }
+        /// <summary>
+        /// Gets the work items.
+        /// </summary>
         public List<IWorkItem> WorkItems
         {
             get => this.workItems;
         }
+        /// <summary>
+        /// Gets the activity history.
+        /// </summary>
         public List<IHistoryEntry> ActivityHistory
         {
             get => this.activityHistory;
         }
 
-
+        /// <summary>
+        /// Gets or sets the assigned team.
+        /// </summary>
+        /// <exception cref="ArgumentException">Member {this.Name} is already in another team.</exception>
         public string AssignedTeam
         {
             get => this.assignedTeam;
@@ -52,7 +72,11 @@ namespace WIM14.Models
             }
         }
 
-
+        /// <summary>
+        /// Assigns new work item to the member.
+        /// </summary>
+        /// <param name="item">The item to assign.</param>
+        /// <exception cref="ArgumentException"></exception>
         public void AssignWorkItem(IWorkItem item)
         {
             if (!this.workItems.Contains(item))
@@ -66,6 +90,11 @@ namespace WIM14.Models
             }
         }
 
+        /// <summary>
+        /// Unassigns the work item.
+        /// </summary>
+        /// <param name="item">The item to unassign.</param>
+        /// <exception cref="ArgumentException"></exception>
         public void UnassignWorkItem(IWorkItem item)
         {
             if (this.workItems.Contains(item))
@@ -78,6 +107,12 @@ namespace WIM14.Models
                 throw new ArgumentException($"{item.GetType().Name} {item.Title} was not found.");
             }
         }
+        /// <summary>
+        /// Converts to string.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.String" /> that represents this instance.
+        /// </returns>
         public override string ToString()
         {
             if (this.AssignedTeam == null)

@@ -21,7 +21,7 @@ namespace WIM14.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="Team"/> class.
         /// </summary>
-        /// <param name="newName">The new name.</param>
+        /// <param name="newName">The name of the new team.</param>
         public Team(string newName)
         {
             this.Name = newName;
@@ -31,9 +31,6 @@ namespace WIM14.Models
         /// <summary>
         /// Gets or sets the name.
         /// </summary>
-        /// <value>
-        /// The name.
-        /// </value>
         public string Name 
         {
             get => this.name;
@@ -46,13 +43,16 @@ namespace WIM14.Models
         /// <summary>
         /// Gets the members.
         /// </summary>
-        /// <value>
-        /// The members.
-        /// </value>
         public List<IMember> Members { get; }
-
+        /// <summary>
+        /// Gets the boards.
+        /// </summary>
         public List<IBoard> Boards { get; }
-
+        /// <summary>
+        /// Adds new member to the list of members in the team.
+        /// </summary>
+        /// <param name="newMember">The new member to add.</param>
+        /// <exception cref="ArgumentException"></exception>
         public void AddPerson(IMember newMember)
         {
             if (!this.members.Contains(newMember))
@@ -65,7 +65,11 @@ namespace WIM14.Models
                 throw new ArgumentException($"{newMember.GetType().Name} {newMember.Name} is already added to team {this.Name}.");
             }
         }
-
+        /// <summary>
+        /// Adds new board to the list of boards in the team.
+        /// </summary>
+        /// <param name="newBoard">The new board to add.</param>
+        /// <exception cref="ArgumentException"></exception>
         public void AddBoard (IBoard newBoard)
         {
             if (!this.boards.Contains(newBoard))
@@ -77,7 +81,10 @@ namespace WIM14.Models
                 throw new ArgumentException($"{newBoard.GetType().Name} {newBoard.Name} is already added to team {this.Name}.");
             }
         }
-
+        /// <summary>
+        /// Shows the team activity.
+        /// </summary>
+        /// <returns></returns>
         public string ShowTeamActivity()
         {
             List<IHistoryEntry> teamActivity = new List<IHistoryEntry>();
@@ -96,7 +103,12 @@ namespace WIM14.Models
 
             return string.Join(Environment.NewLine, sortedList); 
         }
-
+        /// <summary>
+        /// Converts to string.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.String" /> that represents this instance.
+        /// </returns>
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
@@ -115,7 +127,11 @@ namespace WIM14.Models
 
             return sb.ToString().Trim();
         }
-
+        /// <summary>
+        /// Ensures if the name is valid.
+        /// </summary>
+        /// <param name="value">The value to check.</param>
+        /// <exception cref="ArgumentException">Please provide a non-empty name.</exception>
         private void EnsureValidName(string value)
         {
             if (string.IsNullOrEmpty(value))
