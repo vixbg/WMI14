@@ -28,6 +28,7 @@ namespace WIM14.Core
 
         private readonly List<IWorkItem> workItems = new List<IWorkItem>();
         public IList<IWorkItem> WorkItems => this.workItems;
+       
 
         // Add team, edit team, remove team
 

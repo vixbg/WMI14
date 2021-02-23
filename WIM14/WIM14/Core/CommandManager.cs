@@ -14,7 +14,7 @@ namespace WIM14.Core
         {
             var lineParameters = commandLine
                 .Trim()
-                .Split(" ", StringSplitOptions.RemoveEmptyEntries);
+                .Split(" --", StringSplitOptions.RemoveEmptyEntries);
 
             string commandName = lineParameters[0];
             List<string> commandParameters = lineParameters.Skip(1).ToList();

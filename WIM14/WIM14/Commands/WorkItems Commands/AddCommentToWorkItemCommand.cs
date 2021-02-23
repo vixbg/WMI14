@@ -51,7 +51,7 @@ namespace WIM14.Commands
             item.Comments.Add(comment);
             item.AddHistoryItem($"New comment added to {item.GetType().Name} with ID{item.Id}");
 
-            return $"Comment added successfully to {item.GetType()} with title {item.Title}.";
+            return $"Comment added successfully to {item.GetType().Name} with title {item.Title}.";
         }
     }
 }

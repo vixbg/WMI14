@@ -69,7 +69,7 @@ namespace WIM14.Commands
                     _ => throw new ArgumentException("Invalid Status.")
                 };
             }
-            else
+            else if(searchType == "assignee")
             {
                 var assigneeFound = this.Database.Members.ToList().FirstOrDefault(p => p.Name == nameOrStatus);
                 if ((assigneeFound == null))

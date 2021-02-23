@@ -23,7 +23,7 @@ namespace WIM14.Models.Abstracts
 
         public WorkItem(string title, string description)
         {
-            this.Id = Database.Instance.WorkItems.Any() ? Database.Instance.WorkItems.Max(m => m.Id) + 1 : 1;
+            this.Id = Database.Instance.WorkItems.Any() ? Database.Instance.WorkItems.Max(m => m.Id) + 1 : 0;
             this.History = new List<IHistoryEntry>();
             this.Comments = new List<IComment>();
             this.Title = title;

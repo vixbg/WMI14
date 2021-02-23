@@ -14,9 +14,13 @@ namespace WIM14.Commands
         }
         public override string Execute()
         {
-            return this.Database.Members.Count > 0
-                ? string.Join(Environment.NewLine, this.Database.Teams).Trim()
-                : "There are no registered teams.";
+            StringBuilder sb = new StringBuilder();
+            foreach (var team in this.Database.Teams)
+            {
+                sb.AppendLine(team.ToString());
+            }
+
+            return sb.ToString().Trim();
         }
     }
 }

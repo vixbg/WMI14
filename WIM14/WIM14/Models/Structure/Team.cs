@@ -83,9 +83,21 @@ namespace WIM14.Models
 
         public override string ToString()
         {
-            return $"Team {this.Name} " +
-                   $"Members: {this.Members.Select(member => member.Name)}" +
-                   $"Boards: {this.Boards.Select(board => board.Name)}";
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine($"Team {this.Name} ");
+            sb.AppendLine($"Members:");
+            foreach (var member in this.members)
+            {
+                sb.AppendLine(member.Name);
+            }
+            sb.AppendLine($"Boards:");
+
+            foreach (var board in this.boards)
+            {
+                sb.AppendLine(board.Name);
+            }
+
+            return sb.ToString().Trim();
         }
 
         private void EnsureValidName(string value)
