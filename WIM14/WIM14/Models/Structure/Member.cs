@@ -80,7 +80,7 @@ namespace WIM14.Models
         }
         public override string ToString()
         {
-            if (this.AssignedTeam == "")
+            if (this.AssignedTeam == null)
             {
                 return $"{this.GetType().Name} {this.Name} || Total work items: {this.workItems.Count} ";
             }

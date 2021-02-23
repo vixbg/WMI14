@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using WIM14.Commands.Abstracts;
+using WIM14.Core.Contracts;
 using WIM14.Models;
 using WIM14.Models.Contracts;
 using WIM14.Models.Enums;
@@ -11,7 +12,7 @@ namespace WIM14.Commands
 {
     class CreateBugCommand : Command
     {
-        public CreateBugCommand(IList<string> commandParameters) : base(commandParameters)
+        public CreateBugCommand(IList<string> commandParameters, IDatabase database, IFactory factory) : base(commandParameters,  database,  factory)
         {
         }
         public override string Execute()

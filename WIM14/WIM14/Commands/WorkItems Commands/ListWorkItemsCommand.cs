@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using WIM14.Commands.Abstracts;
+using WIM14.Core.Contracts;
 using WIM14.Models.Contracts;
 using WIM14.Models.Enums;
 using WIM14.Models.WorkItems;
@@ -11,7 +12,7 @@ namespace WIM14.Commands
 {
     class ListWorkItemsCommand : Command
     {
-        public ListWorkItemsCommand(IList<string> commandParameters) : base(commandParameters)
+        public ListWorkItemsCommand(IList<string> commandParameters, IDatabase database, IFactory factory) : base(commandParameters, database, factory)
         {
         }
 

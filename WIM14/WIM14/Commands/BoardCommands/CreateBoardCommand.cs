@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using WIM14.Commands.Abstracts;
+using WIM14.Core.Contracts;
 using WIM14.Models;
 
 namespace WIM14.Commands
@@ -10,7 +11,7 @@ namespace WIM14.Commands
     public class CreateBoardCommand : Command
     { 
         //createboard [BOARDNAME] [TEAMNAME]
-        public CreateBoardCommand(List<string> commandParameters) : base(commandParameters)
+        public CreateBoardCommand(List<string> commandParameters, IDatabase database, IFactory factory) : base(commandParameters, database, factory)
         {
         }
         public override string Execute()

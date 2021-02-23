@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using WIM14.Commands.Abstracts;
+using WIM14.Core.Contracts;
 using WIM14.Models.Contracts;
 
 namespace WIM14.Commands
@@ -9,7 +10,7 @@ namespace WIM14.Commands
     //createteam [TEAMNAME]
     class CreateTeamCommand : Command
     {
-        public CreateTeamCommand(IList<string> commandParameters) : base(commandParameters)
+        public CreateTeamCommand(IList<string> commandParameters, IDatabase database, IFactory factory) : base(commandParameters, database, factory)
         {
         }
         public override string Execute()
@@ -25,7 +26,7 @@ namespace WIM14.Commands
 
             this.Database.Teams.Add(newMember);
 
-            return $"Team with ID {this.Database.Members.Count + 1} was created.";
+            return $"Team with ID {this.Database.Members.Count} was created.";
         }
     }
 }

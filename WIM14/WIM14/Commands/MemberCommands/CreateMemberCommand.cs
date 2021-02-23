@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using WIM14.Commands.Abstracts;
+using WIM14.Core.Contracts;
 using WIM14.Models.Contracts;
 
 namespace WIM14.Commands
@@ -9,7 +10,7 @@ namespace WIM14.Commands
     public class CreateMemberCommand : Command
     {
         //createmember [MEMBERNAME] 
-        public CreateMemberCommand(IList<string> commandParameters) : base(commandParameters)
+        public CreateMemberCommand(IList<string> commandParameters, IDatabase database, IFactory factory) : base(commandParameters, database, factory)
         {
         }
         public override string Execute()

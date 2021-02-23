@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using WIM14.Commands.Abstracts;
+using WIM14.Core.Contracts;
 using WIM14.Models.Collections;
 using WIM14.Models.Contracts;
 
@@ -10,7 +11,7 @@ namespace WIM14.Commands
 {
     class AddCommentToWorkItemCommand : Command
     {
-        public AddCommentToWorkItemCommand(IList<string> commandParameters) : base(commandParameters)
+        public AddCommentToWorkItemCommand(IList<string> commandParameters, IDatabase database, IFactory factory) : base(commandParameters, database, factory)
         {
         }
         //addcomment [ID] [Author] [Comment]

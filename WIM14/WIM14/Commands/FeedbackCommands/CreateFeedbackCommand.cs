@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 using WIM14.Commands.Abstracts;
+using WIM14.Core.Contracts;
 using WIM14.Models.Contracts;
 
 namespace WIM14.Commands
 {
     class CreateFeedbackCommand : Command
     {
-        public CreateFeedbackCommand(IList<string> commandParameters) : base(commandParameters)
+        public CreateFeedbackCommand(IList<string> commandParameters, IDatabase database, IFactory factory) : base(commandParameters, database, factory)
         {
         }
         public override string Execute()

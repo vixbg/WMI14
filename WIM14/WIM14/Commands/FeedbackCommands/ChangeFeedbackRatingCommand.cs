@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using WIM14.Commands.Abstracts;
+using WIM14.Core.Contracts;
 using WIM14.Models.Contracts;
 
 namespace WIM14.Commands
 {
     class ChangeFeedbackRatingCommand : Command
     {
-        public ChangeFeedbackRatingCommand(IList<string> commandParameters) : base(commandParameters)
+        public ChangeFeedbackRatingCommand(IList<string> commandParameters, IDatabase database, IFactory factory) : base(commandParameters,  database,  factory)
         {
         }
         public override string Execute()

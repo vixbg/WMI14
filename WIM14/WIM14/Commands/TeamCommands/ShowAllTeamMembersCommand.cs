@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using WIM14.Commands.Abstracts;
+using WIM14.Core.Contracts;
 
 namespace WIM14.Commands
 {
     class ShowAllTeamMembersCommand : Command
     {
         //showallteammembers [TEAMNAME]
-        public ShowAllTeamMembersCommand(IList<string> commandParameters) : base(commandParameters)
+        public ShowAllTeamMembersCommand(IList<string> commandParameters, IDatabase database, IFactory factory) : base(commandParameters, database, factory)
         {
         }
         public override string Execute()

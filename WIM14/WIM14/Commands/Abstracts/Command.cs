@@ -8,30 +8,18 @@ namespace WIM14.Commands.Abstracts
 {
     public abstract class Command : ICommand
     {
-        protected Command(IList<string> commandParameters)
-        {
+        protected readonly IDatabase Database;
+        protected readonly IFactory Factory;
+        protected Command(IList<string> commandParameters, IDatabase database, IFactory factory)
+        {            
             this.CommandParameters = new List<string>(commandParameters);
+            this.Database = database ?? throw new ArgumentNullException(nameof(database));
+            this.Factory = factory ?? throw new ArgumentNullException(nameof(factory));
         }
         public abstract string Execute();
         protected IList<string> CommandParameters 
         {
             get;
-        }
-
-        protected IDatabase Database
-        {
-            get
-            {
-                return Core.Database.Instance;
-            }
-        }
-
-        protected IFactory Factory
-        {
-            get
-            {
-                return Core.Factory.Instance;
-            }
         }
 
     }

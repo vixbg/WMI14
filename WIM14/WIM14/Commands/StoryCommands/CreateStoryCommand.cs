@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using WIM14.Commands.Abstracts;
+using WIM14.Core.Contracts;
 using WIM14.Models.Contracts;
 using WIM14.Models.Enums;
 
@@ -9,7 +10,7 @@ namespace WIM14.Commands
 {
     class CreateStoryCommand : Command
     {
-        public CreateStoryCommand(IList<string> commandParameters) : base(commandParameters)
+        public CreateStoryCommand(IList<string> commandParameters, IDatabase database, IFactory factory) : base(commandParameters, database, factory)
         {
         }
         public override string Execute()

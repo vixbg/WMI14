@@ -22,38 +22,38 @@ namespace WIM14.Core
             return commandName switch
             {
                 //board
-                "createboard" => new CreateBoardCommand(commandParameters),
-                "showboardactivity" => new ShowBoardActivityCommand(commandParameters),
+                "createboard" => new CreateBoardCommand(commandParameters, Database.Instance, Factory.Instance),
+                "showboardactivity" => new ShowBoardActivityCommand(commandParameters, Database.Instance, Factory.Instance),
                 //bug
-                "changebugpriority" => new ChangeBugPriorityCommand(commandParameters),
-                "changebugseverity" => new ChangeBugSeverityCommand(commandParameters),
-                "changebugstatus" => new ChangeBugStatusCommand(commandParameters),
-                "createbug" => new CreateBugCommand(commandParameters),
+                "changebugpriority" => new ChangeBugPriorityCommand(commandParameters, Database.Instance, Factory.Instance),
+                "changebugseverity" => new ChangeBugSeverityCommand(commandParameters, Database.Instance, Factory.Instance),
+                "changebugstatus" => new ChangeBugStatusCommand(commandParameters, Database.Instance, Factory.Instance),
+                "createbug" => new CreateBugCommand(commandParameters, Database.Instance, Factory.Instance),
                 //feedback
-                "changefeedbackrating" => new ChangeFeedbackRatingCommand(commandParameters),
-                "changefeedbackstatus" => new ChangeFeedbackStatusCommand(commandParameters),
-                "createfeedback" => new CreateFeedbackCommand(commandParameters),
+                "changefeedbackrating" => new ChangeFeedbackRatingCommand(commandParameters, Database.Instance, Factory.Instance),
+                "changefeedbackstatus" => new ChangeFeedbackStatusCommand(commandParameters, Database.Instance, Factory.Instance),
+                "createfeedback" => new CreateFeedbackCommand(commandParameters, Database.Instance, Factory.Instance),
                 //member
-                "addmember" => new AddMemberCommand(commandParameters),
-                "createmember" => new CreateMemberCommand(commandParameters),
-                "showallmembers" => new ShowAllMembersCommand(commandParameters),
-                "showmemberactivity" => new ShowMemberActivityCommand(commandParameters),
+                "addmember" => new AddMemberCommand(commandParameters, Database.Instance, Factory.Instance),
+                "createmember" => new CreateMemberCommand(commandParameters, Database.Instance, Factory.Instance),
+                "showallmembers" => new ShowAllMembersCommand(commandParameters, Database.Instance, Factory.Instance),
+                "showmemberactivity" => new ShowMemberActivityCommand(commandParameters, Database.Instance, Factory.Instance),
                 //story
-                "changestorypriority" => new ChangeStoryPriorityCommand(commandParameters),
-                "changestorysize" => new ChangeStorySizeCommand(commandParameters),
-                "changestorystatus" => new ChangeStoryStatusCommand(commandParameters),
-                "createstory" => new CreateStoryCommand(commandParameters),
+                "changestorypriority" => new ChangeStoryPriorityCommand(commandParameters, Database.Instance, Factory.Instance),
+                "changestorysize" => new ChangeStorySizeCommand(commandParameters, Database.Instance, Factory.Instance),
+                "changestorystatus" => new ChangeStoryStatusCommand(commandParameters, Database.Instance, Factory.Instance),
+                "createstory" => new CreateStoryCommand(commandParameters, Database.Instance, Factory.Instance),
                 //team
-                "createteam" => new CreateTeamCommand(commandParameters),
-                "showallteamboards" => new ShowAllTeamBoardsCommand(commandParameters),
-                "showallteammembers" => new ShowAllTeamMembersCommand(commandParameters),
-                "showallteams" => new ShowAllTeamsCommand(commandParameters),
-                "showteamactivity" => new ShowTeamActivityCommand(commandParameters),
+                "createteam" => new CreateTeamCommand(commandParameters, Database.Instance, Factory.Instance),
+                "showallteamboards" => new ShowAllTeamBoardsCommand(commandParameters, Database.Instance, Factory.Instance),
+                "showallteammembers" => new ShowAllTeamMembersCommand(commandParameters, Database.Instance, Factory.Instance),
+                "showallteams" => new ShowAllTeamsCommand(commandParameters, Database.Instance, Factory.Instance),
+                "showteamactivity" => new ShowTeamActivityCommand(commandParameters, Database.Instance, Factory.Instance),
                 //workitems
-                "addcomment" => new AddCommentToWorkItemCommand(commandParameters),
-                "assignworkitem" => new AssignWorkItemCommand(commandParameters),
-                "list" => new ListWorkItemsCommand(commandParameters),
-                "unassignworkitem" => new UnassignWorkItemCommand(commandParameters),
+                "addcomment" => new AddCommentToWorkItemCommand(commandParameters, Database.Instance, Factory.Instance),
+                "assignworkitem" => new AssignWorkItemCommand(commandParameters, Database.Instance, Factory.Instance),
+                "list" => new ListWorkItemsCommand(commandParameters, Database.Instance, Factory.Instance),
+                "unassignworkitem" => new UnassignWorkItemCommand(commandParameters, Database.Instance, Factory.Instance),
                 //default
                 _ => throw new InvalidOperationException("Command does not exist!")
             };
