@@ -1,10 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using WIM14.Models;
 
-namespace WIM14.Tests.BoardTests
+namespace WIM14.Tests.ModelsTests.BoardTests
 {
     [TestClass]
     public class AddHistoryEntry_Should
