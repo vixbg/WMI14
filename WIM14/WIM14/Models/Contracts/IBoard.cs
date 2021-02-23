@@ -9,7 +9,6 @@ namespace WIM14.Models.Contracts
         public List<IWorkItem> WorkItems { get; }
         public List<IHistoryEntry> ActivityHistory { get; }
         public string ShowActivityHistory();
-        void AddHistoryEntry(string v);
         public void AddWorkItem(IWorkItem item);
     }
 }
