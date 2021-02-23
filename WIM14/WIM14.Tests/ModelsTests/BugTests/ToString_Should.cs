@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using WIM14.Models.Contracts;
@@ -21,16 +22,16 @@ namespace WIM14.Tests.ModelsTests.BugTests
             steps.Add("Step 1 to reproduce bug");
             steps.Add("Step 2 to reproduce bug");
             var priority = Priority.High;
-            var severity = BugSeverity.Critical;
+            var severity = Severity.Critical;
             var status = BugStatus.Active;
 
             // Act
-            var bug = new Bug(title, description, steps, priority, severity, status);
+            var bug = new Bug(title, description, steps, priority, severity);
             var sb = new StringBuilder();
             sb.AppendLine($"Bug Item");
             sb.AppendLine($"Title: {title}");
             sb.AppendLine($"Description: {description}");
-            sb.AppendLine($"Item ID: {bug.ID}");
+            sb.AppendLine($"Item ID: {bug.Id}");
             sb.AppendLine($"Comments: No comments yet");
             sb.AppendLine($"Steps: {String.Join(", ", steps)}");
             sb.AppendLine($"Priority: {priority}");
@@ -53,28 +54,28 @@ namespace WIM14.Tests.ModelsTests.BugTests
             steps.Add("Step 1 to reproduce bug");
             steps.Add("Step 2 to reproduce bug");
             var priority = Priority.High;
-            var severity = BugSeverity.Critical;
+            var severity = Severity.Critical;
             var status = BugStatus.Active;
             var firstName = "FirstName";
             var lastName = "LastName";
             var assignee = new Mock<IMember>();
-            assignee.SetupGet(member => member.FirstName).Returns(firstName);
-            assignee.SetupGet(member => member.LastName).Returns(lastName);
+            //assignee.SetupGet(member => member.FirstName).Returns(firstName);
+            //assignee.SetupGet(member => member.LastName).Returns(lastName);
 
             // Act
-            var bug = new Bug(title, description, steps, priority, severity, status, assignee.Object);
+            var bug = new Bug(title, description, steps, priority, severity);
             var sb = new StringBuilder();
             sb.AppendLine($"Bug Item");
             sb.AppendLine($"Title: {title}");
             sb.AppendLine($"Description: {description}");
-            sb.AppendLine($"Item ID: {bug.ID}");
+            sb.AppendLine($"Item ID: {bug.Id}");
             sb.AppendLine($"Comments: No comments yet");
             sb.AppendLine($"Steps: {String.Join(", ", steps)}");
             sb.AppendLine($"Priority: {priority}");
             sb.AppendLine($"Severity: {severity}");
             sb.AppendLine($"Status: {status}");
-            sb.AppendLine($"Assignee: {assignee.Object.FirstName.First().ToString().ToUpper() + assignee.Object.FirstName[1..].ToLower()} " +
-                $"{assignee.Object.LastName.First().ToString().ToUpper() + assignee.Object.LastName[1..].ToLower()}");
+            //sb.AppendLine($"Assignee: {assignee.Object.FirstName.First().ToString().ToUpper() + assignee.Object.FirstName[1..].ToLower()} " +
+                //$"{assignee.Object.LastName.First().ToString().ToUpper() + assignee.Object.LastName[1..].ToLower()}");
             sb.AppendLine("*************************");
             var sut = bug.ToString();
 

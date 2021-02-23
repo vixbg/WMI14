@@ -20,14 +20,14 @@ namespace WIM14.Tests.ModelsTests.BugTests
             steps.Add("Step 1 to reproduce bug");
             steps.Add("Step 2 to reproduce bug");
             var priority = Priority.High;
-            var severity = BugSeverity.Critical;
+            var severity = Severity.Critical;
             var status = BugStatus.Active;
             BugStatus expected = BugStatus.Fixed;
             IMember assignee = new Mock<IMember>().Object;
 
             // Act
-            var sut = new Bug(title, description, steps, priority, severity, status, assignee);
-            sut.ChangeStatus(expected);
+            var sut = new Bug(title, description, steps, priority, severity);
+            //sut.ChangeStatus(expected);
 
             // Assert
             Assert.AreEqual(sut.Status, expected);
