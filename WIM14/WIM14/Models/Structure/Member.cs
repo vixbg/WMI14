@@ -11,7 +11,7 @@ namespace WIM14.Models
     {
         private const int MAX_LENGTH = 15;
         private const int MIN_LENGTH = 5;
-        private readonly List<IWorkItem> workItems = new List<IWorkItem>(); 
+        private readonly List<IWorkItem> workItems = new List<IWorkItem>();
         private readonly List<IHistoryEntry> activityHistory = new List<IHistoryEntry>();
         private string assignedTeam;
 
@@ -25,14 +25,18 @@ namespace WIM14.Models
         {
             get;
         }
-
-        public List<IHistoryEntry> ActivityHistory 
+        public List<IWorkItem> WorkItems
+        {
+            get => this.workItems;
+        }
+        public List<IHistoryEntry> ActivityHistory
         {
             get => this.activityHistory;
         }
 
-        
-        public string AssignedTeam { 
+
+        public string AssignedTeam
+        {
             get => this.assignedTeam;
 
             set
@@ -51,7 +55,7 @@ namespace WIM14.Models
 
         public void AssignWorkItem(IWorkItem item)
         {
-            if(!this.workItems.Contains(item))
+            if (!this.workItems.Contains(item))
             {
                 this.workItems.Add(item);
                 this.AddHistoryEntry($"{item.GetType().Name} {item.Title} was assigned to member {this.Name}.");
@@ -64,7 +68,7 @@ namespace WIM14.Models
 
         public void UnassignWorkItem(IWorkItem item)
         {
-            if(this.workItems.Contains(item))
+            if (this.workItems.Contains(item))
             {
                 this.workItems.Remove(item);
                 this.AddHistoryEntry($"{item.GetType().Name} {item.Title} was unassigned from member {this.Name}.");
@@ -76,7 +80,7 @@ namespace WIM14.Models
         }
         public override string ToString()
         {
-            if(this.AssignedTeam == "")
+            if (this.AssignedTeam == "")
             {
                 return $"{this.GetType().Name} {this.Name} || Total work items: {this.workItems.Count} ";
             }
@@ -99,7 +103,7 @@ namespace WIM14.Models
             {
                 throw new ArgumentException("Please provide a non-empty name.");
             }
-            if (value.Length < MIN_LENGTH || value.Length > MAX_LENGTH) 
+            if (value.Length < MIN_LENGTH || value.Length > MAX_LENGTH)
             {
                 throw new ArgumentException("Please provide a name with length between 5 and 15 characters.");
             }

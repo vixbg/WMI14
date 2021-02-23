@@ -25,11 +25,22 @@ namespace WIM14.Models
             set
             {
                 this.EnsureValidName(value);
+                if(this.name != null)
+                {
+                    this.AddHistoryEntry($"{this.GetType().Name} name was changed to {value}.");
+                }
                 this.name = value;
-                this.AddHistoryEntry($"{this.GetType().Name} name was changed to {value}.");
             }
         }
+        public List<IWorkItem> WorkItems
+        {
+            get => this.workItems;
+        }
 
+        public List<IHistoryEntry> ActivityHistory
+        {
+            get => this.activityHistory;
+        }
         public override string ToString()
         {
             return $"{this.GetType().Name} {this.Name} || Total work items: {this.workItems.Count} ";
