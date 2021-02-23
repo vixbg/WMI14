@@ -4,9 +4,10 @@ using WIM14.Commands.Abstracts;
 using WIM14.Models;
 using System.Linq;
 
+
 namespace WIM14.Commands
 {
-    class AddMemberCommand : Command
+    public class AddMemberCommand : Command
     {
         //addmember [MEMBERNAME] [TEAMNAME]
         public AddMemberCommand(IList<string> commandParameters) : base(commandParameters)
@@ -14,6 +15,11 @@ namespace WIM14.Commands
         }
         public override string Execute()
         {
+            if(this.CommandParameters.Count != 2)
+            {
+                throw new ArgumentException("Invalid parameter count. Command addmember needs [MEMBERNAME] [TEAMNAME] to work.");
+            }
+
             string memberName = this.CommandParameters[0];
             string teamName = this.CommandParameters[1];
 

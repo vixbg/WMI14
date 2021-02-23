@@ -1,12 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using WIM14.Commands;
-using WIM14.Core.Contracts;
-using WIM14.Models;
-using WIM14.Models.Contracts;
 
 namespace WIM14.Tests.CommandsTests.MemberCommandsTests
 {
@@ -34,7 +28,7 @@ namespace WIM14.Tests.CommandsTests.MemberCommandsTests
             var sut = new CreateMemberCommand(name);
 
             //Act
-            Assert.ThrowsException<ArgumentException>(() => sut.Execute()); 
+            Assert.ThrowsException<ArgumentException>(() => sut.Execute());
             
         }
 
