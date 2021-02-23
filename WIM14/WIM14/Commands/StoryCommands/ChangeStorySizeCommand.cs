@@ -24,7 +24,7 @@ namespace WIM14.Commands
                 //TODO: Validations for null
                 id = int.Parse(this.CommandParameters[0]);
                 story = this.Database.WorkItems.FirstOrDefault(s => s.Id == id) as IStory;
-                newSize = Enum.Parse<Size>(this.CommandParameters[1]);
+                newSize = Enum.Parse<Size>(this.CommandParameters[1], true);
             }
             catch
             {

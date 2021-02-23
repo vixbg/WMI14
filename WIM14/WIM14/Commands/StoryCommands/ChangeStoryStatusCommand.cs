@@ -24,7 +24,7 @@ namespace WIM14.Commands
                 //TODO: Validations
                 id = int.Parse(this.CommandParameters[0]);
                 story = this.Database.WorkItems.FirstOrDefault(s => s.Id == id) as IStory;
-                newStatus = Enum.Parse<StoryStatus>(this.CommandParameters[1]);
+                newStatus = Enum.Parse<StoryStatus>(this.CommandParameters[1], true);
             }
             catch
             {

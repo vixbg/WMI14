@@ -24,8 +24,8 @@ namespace WIM14.Commands
                 //TODO: Validations
                 title = this.CommandParameters[0];
                 description = this.CommandParameters[1];
-                priority = Enum.Parse<Priority>(this.CommandParameters[2]);
-                size = Enum.Parse<Size>(this.CommandParameters[3]);
+                priority = Enum.Parse<Priority>(this.CommandParameters[2], true);
+                size = Enum.Parse<Size>(this.CommandParameters[3], true);
             }
             catch
             {

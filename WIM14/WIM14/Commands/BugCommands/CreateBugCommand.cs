@@ -28,8 +28,8 @@ namespace WIM14.Commands
                 title = this.CommandParameters[0];
                 description = this.CommandParameters[1];
                 stepsToReproduce = this.CommandParameters[2].Split("|", StringSplitOptions.None).ToList();
-                priority = Enum.Parse<Priority>(this.CommandParameters[3]);
-                severity = Enum.Parse<Severity>(this.CommandParameters[4]);
+                priority = Enum.Parse<Priority>(this.CommandParameters[3], true);
+                severity = Enum.Parse<Severity>(this.CommandParameters[4], true);
             }
             catch
             {
