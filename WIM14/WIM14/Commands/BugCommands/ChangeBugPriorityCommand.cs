@@ -25,7 +25,7 @@ namespace WIM14.Commands
                 
                 id = int.Parse(this.CommandParameters[0]);
                 bug = this.Database.WorkItems.FirstOrDefault(b => b.Id == id) as IBug;
-                newPriority = Enum.Parse<Priority>(this.CommandParameters[1]);
+                newPriority = Enum.Parse<Priority>(this.CommandParameters[1], true);
             }
             catch
             {
