@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using WIM14.Core;
 using WIM14.Core.Contracts;
 using WIM14.Models.Contracts;
-using Type = WIM14.Models.Enums.Type;
 
 namespace WIM14.Models
 {

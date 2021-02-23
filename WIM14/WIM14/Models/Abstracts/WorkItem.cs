@@ -78,7 +78,7 @@ namespace WIM14.Models.Abstracts
             return value;
         }
 
-        public virtual void AddHistoryItem(string description)
+        protected void AddHistoryItem(string description)
         {
             this.History.Add(new HistoryEntry($"{GetType().Name.ToUpper()}:{description}"));
         }

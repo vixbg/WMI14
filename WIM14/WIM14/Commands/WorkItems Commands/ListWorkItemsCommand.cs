@@ -6,7 +6,6 @@ using WIM14.Commands.Abstracts;
 using WIM14.Core.Contracts;
 using WIM14.Models.Contracts;
 using WIM14.Models.Enums;
-using WIM14.Models.WorkItems;
 
 namespace WIM14.Commands
 {

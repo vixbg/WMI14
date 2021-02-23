@@ -1,20 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text;
-using WIM14.Core;
 using WIM14.Models.Contracts;
 using WIM14.Models.Enums;
 using Type = WIM14.Models.Enums.Type;
 
 namespace WIM14.Models.WorkItems
 {
+    /// <summary>
+    /// Bug Class
+    /// </summary>
+    /// <seealso cref="WIM14.Models.Abstracts.WorkItem{WIM14.Models.Enums.BugStatus}" />
+    /// <seealso cref="WIM14.Models.Contracts.IBug" />
+    /// <seealso cref="WIM14.Models.Contracts.IType" />
     public class Bug : Abstracts.WorkItem<BugStatus>, IBug, IType
     {
         private readonly Type type = Type.Bug;
         private Severity severity;
         private IMember assginee;
         private Priority priority;
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Bug"/> class.
+        /// </summary>
+        /// <param name="title">The title.</param>
+        /// <param name="description">The description.</param>
+        /// <param name="stepsToReproduce">The steps to reproduce.</param>
+        /// <param name="priority">The priority.</param>
+        /// <param name="severity">The severity.</param>
         public Bug(string title, string description, List<string> stepsToReproduce, Priority priority, Severity severity) : base(title, description)
         {
             this.StepsToReproduce = stepsToReproduce;
@@ -25,9 +36,19 @@ namespace WIM14.Models.WorkItems
             
 
         }
-
+        /// <summary>
+        /// Gets the type.
+        /// </summary>
+        /// <value>
+        /// The type.
+        /// </value>
         public Type Type => type;
-
+        /// <summary>
+        /// Gets or sets the steps to reproduce.
+        /// </summary>
+        /// <value>
+        /// The steps to reproduce.
+        /// </value>
         public List<string> StepsToReproduce { get; set; }
 
         public Priority Priority

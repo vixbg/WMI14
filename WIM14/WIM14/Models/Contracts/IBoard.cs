@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using WIM14.Core.Contracts;
-using Type = WIM14.Models.Enums.Type;
 
 namespace WIM14.Models.Contracts
 {
