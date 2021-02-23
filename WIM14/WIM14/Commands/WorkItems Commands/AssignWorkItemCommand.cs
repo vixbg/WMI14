@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using WIM14.Commands.Abstracts;
+using WIM14.Models.Contracts;
 
 namespace WIM14.Commands
 {
@@ -38,8 +39,23 @@ namespace WIM14.Commands
 
             var workItemToAssign = this.Database.WorkItems[workItemID];
             var member = this.Database.Members.ToList().Find(member => member.Name == memberName);
+            if (member == null)
+            {
+                throw new ArgumentException("No member found with that name.");
+            }
 
             member.AssignWorkItem(workItemToAssign);
+
+            if (workItemToAssign is IBug)
+            {
+                var item = (IBug)workItemToAssign;
+                item.Assignee = member;
+            }
+            else if (workItemToAssign is IStory)
+            {
+                var item = (IStory)workItemToAssign;
+                item.Assignee = member;
+            }
 
             return $"{workItemToAssign.GetType().Name} {workItemToAssign.Title} was assigned to member {member.Name}.";
         }

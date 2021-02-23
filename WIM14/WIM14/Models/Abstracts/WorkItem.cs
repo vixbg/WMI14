@@ -26,8 +26,8 @@ namespace WIM14.Models.Abstracts
             this.Id = Database.Instance.WorkItems.Max(m => m.Id) + 1;
             this.History = new List<IHistoryEntry>();
             this.Comments = new List<IComment>();
-            this.title = title;
-            this.description = description;
+            this.Title = title;
+            this.Description = description;
             AddHistoryItem($"Item with ID{this.Id} was created.");
 
         }
