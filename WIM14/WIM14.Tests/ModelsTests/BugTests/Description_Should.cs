@@ -1,18 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using WIM14.Core.Contracts;
-using WIM14.Models;
-using WIM14.Models.Contracts;
 using WIM14.Models.Enums;
 using WIM14.Models.WorkItems;
 
 namespace WIM14.Tests.ModelsTests.BugTests
-{
-    [TestClass]
-    public class Title_Should
+{ [TestClass]
+    public class Description_Should
     {
         [TestMethod]
         public void SetCorrectValue()
@@ -25,22 +20,22 @@ namespace WIM14.Tests.ModelsTests.BugTests
             steps.Add("Step 2 to reproduce bug");
             var priority = Priority.High;
             var expected = Severity.Critical;
-            var newTitle = "ValidTitle";
+            var newDescription = "ValidDescription";
 
             // Act
             var sut = new Bug(title, description, steps, priority, expected);
-            sut.Title = newTitle;
+            sut.Description = newDescription;
 
             //Assert
-            Assert.AreEqual(newTitle, sut.Title);
+            Assert.AreEqual(newDescription, sut.Description);
         }
 
         [TestMethod]
         [DataRow(null)]
         [DataRow("")]
         [DataRow("name")]
-        [DataRow("arbitrium arbitror architecto arcu ardore arguerent ars")]
-        public void ThrowException(string newTitle)
+        [DataRow("careret caret caritatem carum causa causae causam causas cedentem celeritas censes censet centurionum cepisse ceramico cernantur cernimus certa certae certamen certe certissimam ceteris cetero ceterorum ceteros choro chorusque chremes chrysippe chrysippi chrysippo cibo cillum circumcisaque cives civibus civitas civitatis civium clamat clariora claris clarorum class claudicare clita coercendi coerceri cogitarent cogitavisse cogitemus cognita cognitio cognitione cognitionem cognitionis cognitioque cognomen cognoscerem cognosci cohaerescant comiti")]
+        public void ThrowException(string newDescription)
         {
             // Arrange
             var title = "Random bug";
@@ -55,8 +50,7 @@ namespace WIM14.Tests.ModelsTests.BugTests
             var sut = new Bug(title, description, steps, priority, expected);
 
             //Act&Assert
-            Assert.ThrowsException<ArgumentException>(() => sut.Title = newTitle);
+            Assert.ThrowsException<ArgumentException>(() => sut.Description = newDescription);
         }
     }
 }
-
