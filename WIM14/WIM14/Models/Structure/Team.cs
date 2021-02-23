@@ -9,19 +9,31 @@ using Type = WIM14.Models.Enums.Type;
 
 namespace WIM14.Models
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <seealso cref="WIM14.Models.Contracts.ITeam" />
     public class Team : ITeam
     {
         private readonly List<IMember> members = new List<IMember>(); 
         private readonly List<IBoard> boards = new List<IBoard>();
         private string name;
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Team"/> class.
+        /// </summary>
+        /// <param name="newName">The new name.</param>
         public Team(string newName)
         {
             this.Name = newName;
             this.Boards = boards;
             this.Members = members;
         }
-
+        /// <summary>
+        /// Gets or sets the name.
+        /// </summary>
+        /// <value>
+        /// The name.
+        /// </value>
         public string Name 
         {
             get => this.name;
@@ -31,6 +43,12 @@ namespace WIM14.Models
                 this.name = value;
             }
         }
+        /// <summary>
+        /// Gets the members.
+        /// </summary>
+        /// <value>
+        /// The members.
+        /// </value>
         public List<IMember> Members { get; }
 
         public List<IBoard> Boards { get; }
@@ -40,7 +58,6 @@ namespace WIM14.Models
             if (!this.members.Contains(newMember))
             {
                 newMember.AssignedTeam = this.Name;
-                newMember.AddHistoryEntry($"{newMember.GetType().Name} {newMember.Name} was added to team {this.Name}.");
                 this.members.Add(newMember);
             }
             else
@@ -53,7 +70,6 @@ namespace WIM14.Models
         {
             if (!this.boards.Contains(newBoard))
             {
-                newBoard.AddHistoryEntry($"{newBoard.GetType().Name} {newBoard.Name} was added to team {this.Name}.");
                 this.boards.Add(newBoard);
             }
             else

@@ -14,8 +14,6 @@ namespace WIM14.Models.Contracts
         public void AssignWorkItem(IWorkItem item);
         public void UnassignWorkItem(IWorkItem item);
         public string ShowActivityHistory();
-        public void AddHistoryEntry(string desc);
-
 
     }
 }

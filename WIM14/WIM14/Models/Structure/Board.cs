@@ -49,7 +49,7 @@ namespace WIM14.Models
         {
             return string.Join(Environment.NewLine, this.activityHistory);
         }
-        public void AddHistoryEntry(string desc)
+        private void AddHistoryEntry(string desc)
         {
             this.activityHistory.Add(new HistoryEntry(desc));
         }
