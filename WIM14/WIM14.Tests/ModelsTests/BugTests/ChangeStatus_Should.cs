@@ -23,11 +23,11 @@ namespace WIM14.Tests.ModelsTests.BugTests
             var severity = Severity.Critical;
             var status = BugStatus.Active;
             BugStatus expected = BugStatus.Fixed;
-            IMember assignee = new Mock<IMember>().Object;
+            
 
             // Act
             var sut = new Bug(title, description, steps, priority, severity);
-            //sut.ChangeStatus(expected);
+            sut.Status = expected;
 
             // Assert
             Assert.AreEqual(sut.Status, expected);

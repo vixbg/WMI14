@@ -21,6 +21,7 @@
   <ItemGroup>
     <Folder Include="CollectionsTests\CommentTests\" />
     <Folder Include="CollectionsTests\HistoryEntryTests\" />
+    <Folder Include="CommandsTests\BugCommands\" />
   </ItemGroup>
 
 </Project>

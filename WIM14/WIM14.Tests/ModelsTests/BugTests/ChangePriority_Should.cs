@@ -22,12 +22,11 @@ namespace WIM14.Tests.ModelsTests.BugTests
             Priority priority = Priority.High;
             Priority expected = Priority.Low;
             var severity = Severity.Critical;
-            var status = BugStatus.Active;
-            var assignee = new Mock<IMember>().Object;
+            
 
             // Act
             var sut = new Bug(title, description, steps, priority, severity);
-            //sut.ChangePriority(expected);
+            sut.Priority = expected;
 
             // Assert
             Assert.AreEqual(sut.Priority, expected);
