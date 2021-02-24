@@ -10,7 +10,7 @@ namespace WIM14.Models.WorkItems
     /// <seealso cref="WIM14.Models.Abstracts.WorkItem{WIM14.Models.Enums.StoryStatus}" />
     /// <seealso cref="WIM14.Models.Contracts.IStory" />
     /// <seealso cref="WIM14.Models.Contracts.IType" />
-    public class Story : Abstracts.WorkItem<StoryStatus>, IStory, IType
+    public class Story : Abstracts.WorkItem<StoryStatus>, IStory
     {
         private WorkItemType workItemType = WorkItemType.Story;
         private Priority priority;
@@ -25,7 +25,7 @@ namespace WIM14.Models.WorkItems
         /// <param name="description">String between 10 and 500 chars.</param>
         /// <param name="priority">High, Medium, Low.</param>
         /// <param name="size">Large, Medium, Small.</param>
-        public Story(string title, string description, Priority priority, Size size) : base(title, description)
+        public Story(string title, string description, Priority priority, Size size) : base(title, description, WorkItemType.Story)
         {
             this.Priority = priority;
             this.Size = size;
@@ -33,13 +33,6 @@ namespace WIM14.Models.WorkItems
             this.Assignee = new Member("Not Assigned");
         }
 
-        /// <summary>
-        /// Gets the type.
-        /// </summary>
-        /// <value>
-        /// The type.
-        /// </value>
-        public Type Type => type;
 
         /// <summary>
         /// Gets or sets the priority.

@@ -20,6 +20,7 @@ namespace WIM14.Models.Abstracts
         private string title;
         private string description;
         private T status;
+        private WorkItemType workItemType;
         private const int MinDescLength = 10;
         private const int MaxDescLength = 500;
         private const int MinTitleLength = 10;
@@ -32,7 +33,7 @@ namespace WIM14.Models.Abstracts
         /// </summary>
         /// <param name="title">String between 10 and 50 chars.</param>
         /// <param name="description">String between 10 and 500 chars.</param>
-        public WorkItem(string title, string description)
+        public WorkItem(string title, string description, WorkItemType newtype)
         {
             this.Id = Database.Instance.WorkItems.Any() ? Database.Instance.WorkItems.Max(m => m.Id) + 1 : 0;
             this.History = new List<IHistoryEntry>();
@@ -43,6 +44,8 @@ namespace WIM14.Models.Abstracts
             AddHistoryItem($"Item with ID{this.Id} was created.");
 
         }
+
+        public WorkItemType WorkItemType { get; }
 
         /// <summary>
         /// Gets the identifier.

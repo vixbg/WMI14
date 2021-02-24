@@ -11,7 +11,7 @@ namespace WIM14.Models.WorkItems
     /// <seealso cref="WIM14.Models.Abstracts.WorkItem{WIM14.Models.Enums.FeedbackStatus}" />
     /// <seealso cref="WIM14.Models.Contracts.IFeedback" />
     /// <seealso cref="WIM14.Models.Contracts.IType" />
-    public class Feedback : Abstracts.WorkItem<FeedbackStatus>, IFeedback, IType
+    public class Feedback : Abstracts.WorkItem<FeedbackStatus>, IFeedback
     {
         private WorkItemType workItemType = WorkItemType.Feedback;
         private int rating;
@@ -23,7 +23,7 @@ namespace WIM14.Models.WorkItems
         /// <param name="title">String between 10 and 50 chars.</param>
         /// <param name="description">String between 10 and 500 chars.</param>
         /// <param name="rating">Integer between 1 and 5.</param>
-        public Feedback(string title, string description, int rating) : base(title, description)
+        public Feedback(string title, string description, int rating) : base(title, description, WorkItemType.Feedback)
         {
             this.Rating = rating;
             this.Status = FeedbackStatus.New;
@@ -35,7 +35,7 @@ namespace WIM14.Models.WorkItems
         /// <value>
         /// The type.
         /// </value>
-        public Type Type => type;
+        
 
         /// <summary>
         /// Gets or sets the rating.

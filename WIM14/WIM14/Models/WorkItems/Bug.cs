@@ -25,7 +25,7 @@ namespace WIM14.Models.WorkItems
         /// <param name="stepsToReproduce">Strings separated by "|".</param>
         /// <param name="priority">High, Medium, Low</param>
         /// <param name="severity">Critical, Major, Minor.</param>
-        public Bug(string title, string description, List<string> stepsToReproduce, Priority priority, Severity severity) : base(title, description)
+        public Bug(string title, string description, List<string> stepsToReproduce, Priority priority, Severity severity) : base(title, description, WorkItemType.Bug)
         {
             this.StepsToReproduce = stepsToReproduce;
             this.Priority = priority;
@@ -35,13 +35,6 @@ namespace WIM14.Models.WorkItems
             
         }
 
-        /// <summary>
-        /// Gets the type.
-        /// </summary>
-        /// <value>
-        /// The type.
-        /// </value>
-        public Type Type => type;
 
         /// <summary>
         /// Gets or sets the steps to reproduce.
