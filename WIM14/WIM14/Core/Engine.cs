@@ -5,10 +5,20 @@ using WIM14.Core.Contracts;
 
 namespace WIM14.Core
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <seealso cref="WIM14.Core.Contracts.IEngine" />
     class Engine : IEngine
     {
         private static Engine instance;
 
+        /// <summary>
+        /// Gets the instance.
+        /// </summary>
+        /// <value>
+        /// The instance.
+        /// </value>
         public static IEngine Instance
         {
             get
@@ -24,10 +34,17 @@ namespace WIM14.Core
 
         private readonly ICommandManager commandManager;
 
+        /// <summary>
+        /// Prevents a default instance of the <see cref="Engine"/> class from being created.
+        /// </summary>
         private Engine()
         {
             this.commandManager = new CommandManager();
         }
+
+        /// <summary>
+        /// Runs the instance.
+        /// </summary>
         public void Run()
         {
             while (true)
@@ -43,11 +60,21 @@ namespace WIM14.Core
             }
         }
 
+        /// <summary>
+        /// Reads from the Console.
+        /// </summary>
+        /// <returns></returns>
         private string Read()
         {
             string input = Console.ReadLine();
             return input;
         }
+
+        /// <summary>
+        /// Processes the specified command line.
+        /// </summary>
+        /// <param name="commandLine">The command line to process.</param>
+        /// <returns></returns>
         private string Process(string commandLine)
         {
             try
@@ -67,6 +94,11 @@ namespace WIM14.Core
                 return $"ERROR: {e.Message}";
             }
         }
+
+        /// <summary>
+        /// Prints the command result.
+        /// </summary>
+        /// <param name="commandResult">The command result to print.</param>
         private void Print(string commandResult)
         {
             StringBuilder sb = new StringBuilder();

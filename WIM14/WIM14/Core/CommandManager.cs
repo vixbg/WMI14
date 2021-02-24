@@ -7,8 +7,17 @@ using WIM14.Core.Contracts;
 
 namespace WIM14.Core
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <seealso cref="WIM14.Core.Contracts.ICommandManager" />
     class CommandManager : ICommandManager
     {
+        /// <summary>
+        /// Parses the command.
+        /// </summary>
+        /// <param name="commandLine">The command line to parse.</param>
+        /// <returns></returns>
         public ICommand ParseCommand(string commandLine)
         {
             var lineParameters = commandLine
@@ -56,8 +65,6 @@ namespace WIM14.Core
                 //default
                 _ => throw new InvalidOperationException("Command does not exist!")
             };
-
-
         }
     }
 }

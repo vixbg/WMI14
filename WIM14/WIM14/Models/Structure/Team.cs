@@ -16,16 +16,18 @@ namespace WIM14.Models
         private readonly List<IMember> members = new List<IMember>(); 
         private readonly List<IBoard> boards = new List<IBoard>();
         private string name;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Team"/> class.
         /// </summary>
-        /// <param name="newName">The name of the new team.</param>
+        /// <param name="newName">Non-empty string.</param>
         public Team(string newName)
         {
             this.Name = newName;
             this.Boards = boards;
             this.Members = members;
         }
+
         /// <summary>
         /// Gets or sets the name.
         /// </summary>
@@ -38,14 +40,17 @@ namespace WIM14.Models
                 this.name = value;
             }
         }
+
         /// <summary>
         /// Gets the members.
         /// </summary>
         public List<IMember> Members { get; }
+
         /// <summary>
         /// Gets the boards.
         /// </summary>
         public List<IBoard> Boards { get; }
+
         /// <summary>
         /// Adds new member to the list of members in the team.
         /// </summary>
@@ -63,6 +68,7 @@ namespace WIM14.Models
                 throw new ArgumentException($"{newMember.GetType().Name} {newMember.Name} is already added to team {this.Name}.");
             }
         }
+
         /// <summary>
         /// Adds new board to the list of boards in the team.
         /// </summary>
@@ -79,6 +85,7 @@ namespace WIM14.Models
                 throw new ArgumentException($"{newBoard.GetType().Name} {newBoard.Name} is already added to team {this.Name}.");
             }
         }
+
         /// <summary>
         /// Shows the team activity.
         /// </summary>
@@ -101,6 +108,7 @@ namespace WIM14.Models
 
             return string.Join(Environment.NewLine, sortedList); 
         }
+
         /// <summary>
         /// Converts to string.
         /// </summary>
@@ -125,6 +133,7 @@ namespace WIM14.Models
 
             return sb.ToString().Trim();
         }
+
         /// <summary>
         /// Ensures if the name is valid.
         /// </summary>
@@ -137,6 +146,5 @@ namespace WIM14.Models
                 throw new ArgumentException("Please provide a non-empty name.");
             }
         }
-
     }
 }

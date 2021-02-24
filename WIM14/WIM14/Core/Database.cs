@@ -4,9 +4,20 @@ using WIM14.Models.Contracts;
 
 namespace WIM14.Core
 {
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <seealso cref="WIM14.Core.Contracts.IDatabase" />
     class Database : IDatabase
     {
         private static IDatabase instance = null;
+
+        /// <summary>
+        /// Gets the instance.
+        /// </summary>
+        /// <value>
+        /// The instance.
+        /// </value>
         public static IDatabase Instance
         {
             get
@@ -21,54 +32,34 @@ namespace WIM14.Core
         }
 
         private readonly List<IMember> members = new List<IMember>();
+
+        /// <summary>
+        /// Gets the members.
+        /// </summary>
+        /// <value>
+        /// The members.
+        /// </value>
         public IList<IMember> Members => this.members;
 
         private readonly List<ITeam> teams = new List<ITeam>();
+
+        /// <summary>
+        /// Gets the teams.
+        /// </summary>
+        /// <value>
+        /// The teams.
+        /// </value>
         public IList<ITeam> Teams => this.teams;
 
         private readonly List<IWorkItem> workItems = new List<IWorkItem>();
+
+        /// <summary>
+        /// Gets the work items.
+        /// </summary>
+        /// <value>
+        /// The work items.
+        /// </value>
         public IList<IWorkItem> WorkItems => this.workItems;
-       
 
-        // Add team, edit team, remove team
-
-        /*
-        public Member CreateMember(string name, Team team) // Move to Factory 
-        {
-            if (Database.Members.Any(m => m.Name == name))
-            {
-                throw new Exception("Member with that name already exists!");
-            }
-            return new Member()
-            {
-                Id = Database.Members.Max(m => m.Id) + 1,
-                Name = name,
-                History = new List<object>(),
-                Team = team
-            };
-        }
-        */
-        //JSON 
-        /*
-        public void Save()
-        {
-            var database = JsonSerializer.Serialize(Teams, new JsonSerializerOptions()
-            {
-                
-            });
-            File.WriteAllText("database.json", database);
-        }
-
-        public void Load()
-        {
-            if (!File.Exists("database.json"))
-            {
-                Teams = new List<Team>();
-                return;
-            }
-            var database = File.ReadAllText("database.json");
-            Teams = JsonSerializer.Deserialize<List<Team>>(database);
-        }
-        */
     }
 }
