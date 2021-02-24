@@ -16,15 +16,16 @@ namespace WIM14.Models.WorkItems
         private Severity severity;
         private IMember assginee;
         private Priority priority;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="Bug"/> class.
         /// </summary>
-        /// <param name="title">The title.</param>
-        /// <param name="description">The description.</param>
-        /// <param name="stepsToReproduce">The steps to reproduce.</param>
-        /// <param name="priority">The priority.</param>
-        /// <param name="severity">The severity.</param>
-        public Bug(string title, string description, List<string> stepsToReproduce, Priority priority, Severity severity) : base(title, description, WorkItemType.Bug)
+        /// <param name="title">String between 10 and 50 chars.</param>
+        /// <param name="description">String between 10 and 500 chars.</param>
+        /// <param name="stepsToReproduce">Strings separated by "|".</param>
+        /// <param name="priority">High, Medium, Low</param>
+        /// <param name="severity">Critical, Major, Minor.</param>
+        public Bug(string title, string description, List<string> stepsToReproduce, Priority priority, Severity severity) : base(title, description)
         {
             this.StepsToReproduce = stepsToReproduce;
             this.Priority = priority;
@@ -32,10 +33,16 @@ namespace WIM14.Models.WorkItems
             this.Status = BugStatus.Active;
             this.Assignee = new Member("Not Assigned");
             
-            
-
         }
-        
+
+        /// <summary>
+        /// Gets the type.
+        /// </summary>
+        /// <value>
+        /// The type.
+        /// </value>
+        public Type Type => type;
+
         /// <summary>
         /// Gets or sets the steps to reproduce.
         /// </summary>
@@ -44,6 +51,12 @@ namespace WIM14.Models.WorkItems
         /// </value>
         public List<string> StepsToReproduce { get; set; }
 
+        /// <summary>
+        /// Gets or sets the priority.
+        /// </summary>
+        /// <value>
+        /// The priority.
+        /// </value>
         public Priority Priority
         {
             get => this.priority;
@@ -55,6 +68,12 @@ namespace WIM14.Models.WorkItems
             }
         }
 
+        /// <summary>
+        /// Gets or sets the severity.
+        /// </summary>
+        /// <value>
+        /// The severity.
+        /// </value>
         public Severity Severity {
             get => this.severity;
             set
@@ -65,6 +84,12 @@ namespace WIM14.Models.WorkItems
             }
         }
 
+        /// <summary>
+        /// Gets or sets the assignee.
+        /// </summary>
+        /// <value>
+        /// The assignee.
+        /// </value>
         public IMember Assignee
         {
             get => this.assginee;
@@ -76,6 +101,12 @@ namespace WIM14.Models.WorkItems
             }
         }
 
+        /// <summary>
+        /// Converts to string.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.String" /> that represents this instance.
+        /// </returns>
         public override string ToString()
         {
             var sb = new StringBuilder();
@@ -93,6 +124,5 @@ namespace WIM14.Models.WorkItems
 
             return sb.ToString().Trim();
         }
-
     }
 }

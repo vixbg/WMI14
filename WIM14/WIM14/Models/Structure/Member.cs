@@ -21,13 +21,14 @@ namespace WIM14.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="Member"/> class.
         /// </summary>
-        /// <param name="newName">The new name.</param>
+        /// <param name="newName">String between 5 and 15 chars</param>
         public Member(string newName)
         {
             this.EnsureValidName(newName);
             this.Name = newName;
             this.AddHistoryEntry($"{this.GetType().Name} {this.Name} was created.");
         }
+
         /// <summary>
         /// Gets the name.
         /// </summary>
@@ -35,6 +36,7 @@ namespace WIM14.Models
         {
             get;
         }
+
         /// <summary>
         /// Gets the work items.
         /// </summary>
@@ -42,6 +44,7 @@ namespace WIM14.Models
         {
             get => this.workItems;
         }
+
         /// <summary>
         /// Gets the activity history.
         /// </summary>
@@ -106,6 +109,7 @@ namespace WIM14.Models
                 throw new ArgumentException($"{item.GetType().Name} {item.Title} was not found.");
             }
         }
+
         /// <summary>
         /// Converts to string.
         /// </summary>
@@ -123,14 +127,34 @@ namespace WIM14.Models
                 return $"{this.GetType().Name} {this.Name} || Total work items: {this.workItems.Count} || Team {this.AssignedTeam}";
             }
         }
+
+        /// <summary>
+        /// Shows the activity history of the member.
+        /// </summary>
+        /// <returns></returns>
         public string ShowActivityHistory()
         {
             return string.Join(Environment.NewLine, this.activityHistory);
         }
+
+        /// <summary>
+        /// Adds history entry.
+        /// </summary>
+        /// <param name="desc">The desc.</param>
         private void AddHistoryEntry(string desc)
         {
             this.activityHistory.Add(new HistoryEntry(desc));
         }
+
+        /// <summary>
+        /// Ensures if the name is valid.
+        /// </summary>
+        /// <param name="value">The value to check.</param>
+        /// <exception cref="ArgumentException">
+        /// Please provide a non-empty name.
+        /// or
+        /// Please provide a name with length between 5 and 15 characters.
+        /// </exception>
         private void EnsureValidName(string value)
         {
             if (string.IsNullOrEmpty(value))
