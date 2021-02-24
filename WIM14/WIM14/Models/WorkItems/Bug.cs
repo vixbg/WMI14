@@ -2,7 +2,6 @@
 using System.Text;
 using WIM14.Models.Contracts;
 using WIM14.Models.Enums;
-using Type = WIM14.Models.Enums.Type;
 
 namespace WIM14.Models.WorkItems
 {
@@ -12,9 +11,8 @@ namespace WIM14.Models.WorkItems
     /// <seealso cref="WIM14.Models.Abstracts.WorkItem{WIM14.Models.Enums.BugStatus}" />
     /// <seealso cref="WIM14.Models.Contracts.IBug" />
     /// <seealso cref="WIM14.Models.Contracts.IType" />
-    public class Bug : Abstracts.WorkItem<BugStatus>, IBug, IType
+    public class Bug : Abstracts.WorkItem<BugStatus>, IBug
     {
-        private readonly Type type = Type.Bug;
         private Severity severity;
         private IMember assginee;
         private Priority priority;
@@ -26,23 +24,18 @@ namespace WIM14.Models.WorkItems
         /// <param name="stepsToReproduce">The steps to reproduce.</param>
         /// <param name="priority">The priority.</param>
         /// <param name="severity">The severity.</param>
-        public Bug(string title, string description, List<string> stepsToReproduce, Priority priority, Severity severity) : base(title, description)
+        public Bug(string title, string description, List<string> stepsToReproduce, Priority priority, Severity severity) : base(title, description, WorkItemType.Bug)
         {
             this.StepsToReproduce = stepsToReproduce;
             this.Priority = priority;
             this.Severity = severity;
             this.Status = BugStatus.Active;
+            this.Assignee = new Member("Not Assigned");
             
             
 
         }
-        /// <summary>
-        /// Gets the type.
-        /// </summary>
-        /// <value>
-        /// The type.
-        /// </value>
-        public Type Type => type;
+        
         /// <summary>
         /// Gets or sets the steps to reproduce.
         /// </summary>
@@ -86,7 +79,7 @@ namespace WIM14.Models.WorkItems
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.AppendLine($"{Type} ----");
+            sb.AppendLine($"{WorkItemType} ----");
             sb.AppendLine($"ID: {Id}");
             sb.AppendLine($"Status: {Status}");
             sb.AppendLine($"Priority: {Priority}");

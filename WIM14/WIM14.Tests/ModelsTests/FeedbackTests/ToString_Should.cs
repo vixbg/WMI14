@@ -26,7 +26,7 @@ namespace WIM14.Tests.ModelsTests.FeedbackTests
             var feedback = new Feedback(title, description, rating);
 
             var sb = new StringBuilder();
-            sb.AppendLine($"{feedback.Type} ----");
+            sb.AppendLine($"{feedback.WorkItemType} ----");
             sb.AppendLine($"ID: {feedback.Id}");
             sb.AppendLine($"Title: {feedback.Title}");
             sb.AppendLine($"Description: {feedback.Description}");

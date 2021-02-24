@@ -2,23 +2,22 @@
 using System.Text;
 using WIM14.Models.Contracts;
 using WIM14.Models.Enums;
-using Type = WIM14.Models.Enums.Type;
 
 namespace WIM14.Models.WorkItems
 {
-    public class Feedback : Abstracts.WorkItem<FeedbackStatus>, IFeedback, IType
+    public class Feedback : Abstracts.WorkItem<FeedbackStatus>, IFeedback
     {
-        private Type type = Type.Feedback;
+        private WorkItemType workItemType = WorkItemType.Feedback;
         private int rating;
 
-        public Feedback(string title, string description, int rating) : base(title, description)
+        public Feedback(string title, string description, int rating) : base(title, description, WorkItemType.Feedback)
         {
             this.Rating = rating;
             this.Status = FeedbackStatus.New;
 
         }
 
-        public Type Type => type;
+        public WorkItemType WorkItemType => workItemType;
         public int Rating
         {
             get => rating;
@@ -44,7 +43,7 @@ namespace WIM14.Models.WorkItems
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.AppendLine($"{Type} ----");
+            sb.AppendLine($"{WorkItemType} ----");
             sb.AppendLine($"ID: {Id}");
             sb.AppendLine($"Title: {Title}");
             sb.AppendLine($"Description: {Description}");

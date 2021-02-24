@@ -27,7 +27,7 @@ namespace WIM14.Tests.ModelsTests.StoryTests
             var story = new Story(title, description, priority, size);
 
             var sb = new StringBuilder();
-            sb.AppendLine($"{story.Type} ----");
+            sb.AppendLine($"{story.WorkItemType} ----");
             sb.AppendLine($"ID: {story.Id}");
             sb.AppendLine($"Status: {story.Status}");
             sb.AppendLine($"Priority: {story.Priority}");
@@ -58,7 +58,7 @@ namespace WIM14.Tests.ModelsTests.StoryTests
 
             story.Assignee = assignee;
             var sb = new StringBuilder();
-            sb.AppendLine($"{story.Type} ----");
+            sb.AppendLine($"{story.WorkItemType} ----");
             sb.AppendLine($"ID: {story.Id}");
             sb.AppendLine($"Status: {story.Status}");
             sb.AppendLine($"Priority: {story.Priority}");

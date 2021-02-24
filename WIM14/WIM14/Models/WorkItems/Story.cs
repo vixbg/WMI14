@@ -1,25 +1,26 @@
 ﻿using System.Text;
 using WIM14.Models.Contracts;
 using WIM14.Models.Enums;
-using Type = WIM14.Models.Enums.Type;
 
 namespace WIM14.Models.WorkItems
 {
-    public class Story : Abstracts.WorkItem<StoryStatus>, IStory, IType
+    public class Story : Abstracts.WorkItem<StoryStatus>, IStory
     {
-        private Type type = Type.Story;
+        private WorkItemType workItemType = WorkItemType.Story;
         private Priority priority;
         private Size size;
         private IMember assginee;
+        private WorkItemType _type;
 
-        public Story(string title, string description, Priority priority, Size size) : base(title, description)
+        public Story(string title, string description, Priority priority, Size size) : base(title, description, WorkItemType.Story)
         {
             this.Priority = priority;
             this.Size = size;
             this.Status = StoryStatus.NotDone;
+            this.Assignee = new Member("Not Assigned");
         }
 
-        public Type Type => type;
+        public WorkItemType WorkItemType => workItemType;
 
         public Priority Priority
         {
@@ -57,7 +58,7 @@ namespace WIM14.Models.WorkItems
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.AppendLine($"{Type} ----");
+            sb.AppendLine($"{WorkItemType} ----");
             sb.AppendLine($"ID: {Id}");
             sb.AppendLine($"Status: {Status}");
             sb.AppendLine($"Priority: {Priority}");
@@ -69,5 +70,6 @@ namespace WIM14.Models.WorkItems
 
             return sb.ToString().Trim();
         }
+
     }
 }

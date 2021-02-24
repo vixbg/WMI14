@@ -1,6 +1,6 @@
 ﻿namespace WIM14.Models.Enums
 {
-    public enum Type
+    public enum WorkItemType
     {
         Board,
         Member,

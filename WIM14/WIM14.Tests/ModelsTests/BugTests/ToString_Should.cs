@@ -29,7 +29,7 @@ namespace WIM14.Tests.ModelsTests.BugTests
             // Act
             var bug = new Bug(title, description, steps, priority, severity);
             var sb = new StringBuilder();
-            sb.AppendLine($"{bug.Type} ----");
+            sb.AppendLine($"{bug.WorkItemType} ----");
             sb.AppendLine($"ID: {bug.Id}");
             sb.AppendLine($"Status: {status}");
             sb.AppendLine($"Priority: {priority}");
@@ -66,7 +66,7 @@ namespace WIM14.Tests.ModelsTests.BugTests
             var bug = new Bug(title, description, steps, priority, severity);
             bug.Assignee = assignee;
             var sb = new StringBuilder();
-            sb.AppendLine($"{bug.Type} ----");
+            sb.AppendLine($"{bug.WorkItemType} ----");
             sb.AppendLine($"ID: {bug.Id}");
             sb.AppendLine($"Status: {status}");
             sb.AppendLine($"Priority: {priority}");

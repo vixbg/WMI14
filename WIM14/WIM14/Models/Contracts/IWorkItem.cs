@@ -4,12 +4,12 @@ using WIM14.Core.Contracts;
 
 namespace WIM14.Models.Contracts
 {
-    public interface IWorkItemStatus<T> where T : Enum
+    public interface IWorkItemStatus<T> where T : Enum 
     {
         public T Status { get; set; }
     }
 
-    public interface IWorkItem
+    public interface IWorkItem : IWorkITemType
     {
         public int Id { get; }
         public List<IComment> Comments { get; set; }

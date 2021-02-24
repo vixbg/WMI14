@@ -5,6 +5,7 @@ using System.Text;
 using WIM14.Core;
 using WIM14.Core.Contracts;
 using WIM14.Models.Contracts;
+using WIM14.Models.Enums;
 
 namespace WIM14.Models.Abstracts
 {
@@ -21,20 +22,21 @@ namespace WIM14.Models.Abstracts
         private const string DescType = "Description";
 
 
-        public WorkItem(string title, string description)
+        public WorkItem(string title, string description, WorkItemType newtype)
         {
             this.Id = Database.Instance.WorkItems.Any() ? Database.Instance.WorkItems.Max(m => m.Id) + 1 : 0;
             this.History = new List<IHistoryEntry>();
             this.Comments = new List<IComment>();
             this.Title = title;
             this.Description = description;
+            this.WorkItemType = newtype;
             AddHistoryItem($"Item with ID{this.Id} was created.");
 
         }
 
         public int Id { get; }
 
-
+        public WorkItemType WorkItemType { get; }
         public List<IComment> Comments { get; set; }
 
         public List<IHistoryEntry> History { get; set; }

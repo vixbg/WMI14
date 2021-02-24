@@ -6,6 +6,7 @@ using WIM14.Commands.Abstracts;
 using WIM14.Core.Contracts;
 using WIM14.Models.Contracts;
 using WIM14.Models.Enums;
+using WIM14.Models.WorkItems;
 
 namespace WIM14.Commands
 {
@@ -38,7 +39,7 @@ namespace WIM14.Commands
             if (CommandParameters.Count > 1)
             {
                 searchType = CommandParameters[1].ToLower();
-                if (!allowedSearchTypes.Contains(type))
+                if (!allowedSearchTypes.Contains(searchType))
                 {
                     throw new Exception($"Search Type {searchType} is not supported in the list command");
                 }
@@ -46,13 +47,13 @@ namespace WIM14.Commands
 
             if (CommandParameters.Count > 2)
             {
-                nameOrStatus = CommandParameters[2].ToLower();
+                nameOrStatus = CommandParameters[2];
             }
 
             if (CommandParameters.Count > 3)
             {
-                orderBy = CommandParameters[3];
-                if (!allowedOrders.Contains(type))
+                orderBy = CommandParameters[3].ToLower();
+                if (!allowedOrders.Contains(orderBy))
                 {
                     throw new Exception($"Order by {orderBy} is not supported in the list command");
                 }
@@ -62,9 +63,9 @@ namespace WIM14.Commands
             {
                 Enum status = (type) switch
                 {
-                    "bug" => Enum.Parse<BugStatus>(nameOrStatus),
-                    "story" => Enum.Parse<StoryStatus>(nameOrStatus),
-                    "feedback" => Enum.Parse<FeedbackStatus>(nameOrStatus),
+                    "bug" => Enum.Parse<BugStatus>(nameOrStatus, true),
+                    "story" => Enum.Parse<StoryStatus>(nameOrStatus, true),
+                    "feedback" => Enum.Parse<FeedbackStatus>(nameOrStatus, true),
                     _ => throw new ArgumentException("Invalid Status.")
                 };
             }
@@ -73,19 +74,19 @@ namespace WIM14.Commands
                 var assigneeFound = this.Database.Members.ToList().FirstOrDefault(p => p.Name == nameOrStatus);
                 if ((assigneeFound == null))
                 {
-                    throw new ArgumentNullException("No assignee found with that name.");
+                    throw new ArgumentException("No assignee found with that name.");
                 }
             }
 
             var workItems = type switch
             {
-                "bug"=> this.Database.WorkItems.Where(b => b is IBug ),
+                "bug"=> this.Database.WorkItems.Where(b => b.WorkItemType == WorkItemType.Bug).ToList(),
 
-                "story"=> this.Database.WorkItems.Where(s => s is IStory),
+                "story"=> this.Database.WorkItems.Where(s => s.WorkItemType == WorkItemType.Story).ToList(),
 
-                "feedback" => this.Database.WorkItems.Where(f => f is IStory),
+                "feedback" => this.Database.WorkItems.Where(f => f.WorkItemType == WorkItemType.Feedback).ToList(),
 
-                "all" => this.Database.WorkItems.AsQueryable(),
+                "all" => this.Database.WorkItems.ToList(),
 
                 _=> throw new ArgumentException("Invalid command parameter.")
 
@@ -93,13 +94,13 @@ namespace WIM14.Commands
 
             workItems = searchType switch
             {
-                "status" => workItems.Where(i => i.StatusString == nameOrStatus ),
+                "status" => workItems.Where(i => i.StatusString == nameOrStatus ).ToList(),
 
                 "assignee" => workItems.Where(i => 
                     (i is IBug bug && bug.Assignee.Name == nameOrStatus) || 
-                    (i is IStory story && story.Assignee.Name == nameOrStatus)),
+                    (i is IStory story && story.Assignee.Name == nameOrStatus)).ToList(),
 
-                "" => workItems.AsQueryable(),
+                "" => workItems.ToList(),
 
                 _ => throw new ArgumentException("Invalid command parameter.")
             };
