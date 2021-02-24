@@ -85,7 +85,7 @@ namespace WIM14.Models
         /// Adds history entry.
         /// </summary>
         /// <param name="desc">String description.</param>
-        protected void AddHistoryEntry(string desc)
+        public void AddHistoryEntry(string desc)
         {
             this.activityHistory.Add(new HistoryEntry(desc));
         }
